@@ -26,3 +26,20 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/usuarios', function () {
+        return view('usuario.index');
+    })->name('usuarios');
+});
+
+//****************   Servicios ********** */
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/Servicios', [App\Http\Controllers\ServiciosController::class, 'index'])->name('Servicios.index');
+    Route::get('/Servicios/create', [App\Http\Controllers\ServiciosController::class, 'create'])->name('Servicios.create');
+   
+});

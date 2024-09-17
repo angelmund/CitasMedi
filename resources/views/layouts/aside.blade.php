@@ -5,8 +5,8 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0"
             href=" https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/default.html " target="_blank">
-            <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Soft UI Dashboard PRO</span>
+            <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="tu logo">
+            <span class="ms-1 font-weight-bold">Panel Administrativo</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -36,14 +36,14 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboards</span>
+                    <span class="nav-link-text ms-1">MEN&Uacute;</span>
                 </a>
                 <div class="collapse " id="dashboardsExamples">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/dashboards/default.html">
-                                <span class="sidenav-mini-icon"> D </span>
-                                <span class="sidenav-normal"> Default </span>
+                            <a class="nav-link " href="{{route('dashboard')}}">
+                                <span class="sidenav-mini-icon"> I </span>
+                                <span class="sidenav-normal"> Inicio </span>
                             </a>
                         </li>
                         <li class="nav-item ">
@@ -89,9 +89,9 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
-            </li>
+            {{--  <li class="nav-item mt-3">
+                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">ADMINISTRACI&Oacute;N</h6>
+            </li>  --}}
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link " aria-controls="pagesExamples"
                     role="button" aria-expanded="false">
@@ -116,21 +116,21 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Pages</span>
+                    <span class="nav-link-text ms-1">ADMINISTRACI&Oacute;N</span>
                 </a>
                 <div class="collapse " id="pagesExamples">
                     <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
+                        {{--  <li class="nav-item ">
                             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#profileExample">
                                 <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal"> Profile <b class="caret"></b></span>
+                                <span class="sidenav-normal"> SERVICIOS <b class="caret"></b></span>
                             </a>
                             <div class="collapse " id="profileExample">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
                                         <a class="nav-link " href="../../pages/pages/profile/overview.html">
                                             <span class="sidenav-mini-icon text-xs"> P </span>
-                                            <span class="sidenav-normal"> Profile Overview </span>
+                                            <span class="sidenav-normal"> SERVICIOS </span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -232,14 +232,14 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li>  --}}
                         <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/pages/pricing-page.html">
-                                <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal"> Pricing Page </span>
+                            <a class="nav-link " href="{{route('Servicios.index')}}">
+                                <span class="sidenav-mini-icon">S</span>
+                                <span class="sidenav-normal"> SERVICIOS</span>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        {{--  <li class="nav-item ">
                             <a class="nav-link " href="../../pages/pages/messages.html">
                                 <span class="sidenav-mini-icon"> M </span>
                                 <span class="sidenav-normal"> Messages </span>
@@ -274,11 +274,11 @@
                                 <span class="sidenav-mini-icon"> N </span>
                                 <span class="sidenav-normal"> Notifications </span>
                             </a>
-                        </li>
+                        </li>  --}}
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
+            {{--  <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link active"
                     aria-controls="applicationsExamples" role="button" aria-expanded="false">
                     <div
@@ -961,9 +961,9 @@
                     <span class="nav-link-text ms-1">Changelog</span>
                 </a>
             </li>
-        </ul>
+        </ul>  --}}
     </div>
-    <div class="sidenav-footer mx-3 mt-3 pt-3">
+    {{--  <div class="sidenav-footer mx-3 mt-3 pt-3">
         <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
             <div class="full-background"
                 style="background-image: url('../../assets/img/curved-images/white-curved.jpg')">
@@ -982,5 +982,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  --}}
 </aside>

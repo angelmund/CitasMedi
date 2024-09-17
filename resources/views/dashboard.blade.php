@@ -1,25 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Dashboard')
 @section('content')
-<div class="row">
-    <div class="col-lg-6 col-12 d-flex ms-auto">
-        <a href="javascript:;" class="btn btn-icon btn-outline-secondary ms-auto">
-            <span class="btn-inner--text">Export</span>
-            <span class="btn-inner--icon ms-2"><i class="ni ni-folder-17"></i></span>
-        </a>
-        <div class="dropleft ms-3">
-            <button class="btn bg-gradient-dark dropdown-toggle" type="button" id="dropdownImport"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                Today
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownImport">
-                <li><a class="dropdown-item" href="javascript:;">Yesterday</a></li>
-                <li><a class="dropdown-item" href="javascript:;">Last 7 days</a></li>
-                <li><a class="dropdown-item" href="javascript:;">Last 30 days</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card">
@@ -30,12 +12,12 @@
                             <p class="text-sm mb-0 text-capitalize font-weight-bold">Users</p>
                             <h5 class="font-weight-bolder mb-0">
                                 930
-                                <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                {{--  <span class="text-success text-sm font-weight-bolder">+55%</span>  --}}
                             </h5>
                         </div>
                     </div>
                     <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-dark shadow text-center border-radius-md">
+                        <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
                             <i class="ni ni-circle-08 text-lg opacity-10" aria-hidden="true"></i>
                         </div>
                     </div>
@@ -49,16 +31,16 @@
                 <div class="row">
                     <div class="col-8">
                         <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">New Users</p>
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Citas</p>
                             <h5 class="font-weight-bolder mb-0">
                                 744
-                                <span class="text-success text-sm font-weight-bolder">+3%</span>
+                                {{--  <span class="text-success text-sm font-weight-bolder">+3%</span>  --}}
                             </h5>
                         </div>
                     </div>
                     <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-dark shadow text-center border-radius-md">
-                            <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="icon icon-shape bg-gradient-success shadow text-center border-radius-md">
+                            <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -71,16 +53,16 @@
                 <div class="row">
                     <div class="col-8">
                         <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Sessions</p>
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Servicios</p>
                             <h5 class="font-weight-bolder mb-0">
                                 1,414
-                                <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                                {{--  <span class="text-danger text-sm font-weight-bolder">-2%</span>  --}}
                             </h5>
                         </div>
                     </div>
                     <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-dark shadow text-center border-radius-md">
-                            <i class="ni ni-watch-time text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="icon icon-shape bg-gradient-warning shadow text-center border-radius-md">
+                            <i class="ni ni-ambulance text-lg opacity-10" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -110,6 +92,42 @@
         </div>
     </div>
 </div>
+<div class="row mt-4">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><span class="badge bg-gradient-secondary">Pasada</span> <span
+                        class="badge bg-gradient-success">Hoy</span> <span
+                        class="badge bg-gradient-warning">Pr&oacute;xima</span>
+                </h5>
+                <div id='calendar-container' class="calendar-container">
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- <div class="row">
+    <div class="col-lg-6 col-12 d-flex ms-auto">
+        <a href="javascript:;" class="btn btn-icon btn-outline-secondary ms-auto">
+            <span class="btn-inner--text">Export</span>
+            <span class="btn-inner--icon ms-2"><i class="ni ni-folder-17"></i></span>
+        </a>
+        <div class="dropleft ms-3">
+            <button class="btn bg-gradient-dark dropdown-toggle" type="button" id="dropdownImport"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Today
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownImport">
+                <li><a class="dropdown-item" href="javascript:;">Yesterday</a></li>
+                <li><a class="dropdown-item" href="javascript:;">Last 7 days</a></li>
+                <li><a class="dropdown-item" href="javascript:;">Last 30 days</a></li>
+            </ul>
+        </div>
+    </div>
+</div> --}}
+
 <div class="row mt-4">
     <div class="col-lg-7 col-md-12">
         <div class="card">
@@ -251,7 +269,7 @@
         </div>
     </div>
 </div>
-<div class="row mt-4">
+{{-- <div class="row mt-4">
     <div class="col-sm-6">
         <div class="card h-100">
             <div class="card-header pb-0 p-3">
@@ -494,5 +512,152 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        {{--  let eventos = @json($eventos);  --}}
+
+        {{--  console.log(eventos);  --}}
+        let calendario = new FullCalendar.Calendar($('#calendar')[0], {
+            locale: 'es',
+            height: 'auto',
+            contentHeight: 'auto',
+            slotMinTime: '08:00',
+            slotMaxTime: '23:59',
+            expandRows: true,
+            showNonCurrentDates: true,
+            fixedWeekCount: false,
+            {{--  themeSystem: 'bootstrap',  --}}
+            initialView: 'dayGridMonth',
+            selectable: true,
+            selectMirror: true,
+            weekends: true,
+            {{--  eventClassNames: 'text-dark bg-info',  --}}
+        
+            {{--  events: @json($eventos),  --}}
+            {{--  events: eventos,  --}}
+            events: [
+        {
+            title: 'Evento de Ejemplo',
+            start: '2024-09-16T10:00:00',
+            end: '2024-09-16T12:00:00',
+            description: 'Descripción del evento de ejemplo',
+            backgroundColor: '#378006', // Color de fondo del evento
+            borderColor: '#378006', // Color del borde del evento
+            allDay:false
+        }
+    ],
+              
+        
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridDay,timeGridWeek'
+            },
+            views: {
+                timeGridDay: { buttonText: 'Día' },
+                dayGridMonth: { buttonText: 'Mes' }, 
+                timeGridWeek: { buttonText: 'Semana' },
+                timeGrid: {
+                    nowIndicator: true,
+                    allDaySlot: false,
+                    selectable: true,
+                    slotLabelFormat: {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true // true, false
+                    }
+                }
+            },
+        
+
+            customButtons: {
+                customPasada: {
+                    text: 'Pasada',
+                    {{--  click: function() {
+                        console.log('Botón Pasada clickeado');
+                    }  --}}
+                },
+                customHoy: {
+                    text: 'Hoy',
+                    {{--  click: function() {
+                        console.log('Botón Hoy clickeado');
+                    }  --}}
+                },
+                customProxima: {
+                    text: 'Próxima',
+                    {{--  click: function() {
+                        console.log('Botón Próxima clickeado');
+                    }  --}}
+                }
+            },
+            
+           
+              
+            dateClick: function(info) {
+                // Mostrar el modal
+                {{--  $('#modalWizard').modal('show');  --}}
+        
+                // Cargar el contenido del modal
+                {{--  $('#modalWizard .modal-body').load('{{ route('Audiencias.create') }}', function(response, status, xhr) {
+                    if (status === "error") {
+                        console.error('Error al cargar el contenido del modal:', xhr.status, xhr.statusText);
+                        return;
+                    }
+        
+                    // Establecer el valor del campo de entrada con la fecha en formato YYYY-MM-DD
+                    $('#fechaProgramada').val(info.dateStr);
+                    console.log(info.dateStr);
+        
+                    // Crear un objeto Date a partir de la cadena de fecha
+                    var date = new Date(info.dateStr);
+        
+                    // Obtener la hora en formato HH:MM
+                    var hours = date.getHours().toString().padStart(2, '0');
+                    var minutes = date.getMinutes().toString().padStart(2, '0');
+                    var formattedTime = hours + ':' + minutes;
+        
+                    // Establecer el valor del campo de hora
+                    $('#horaprogramada').val(formattedTime);
+                    console.log(formattedTime);
+                });  --}}
+            },
+            selectable: true,
+            selectHelper: true,
+            eventDidMount: function(info) {
+                // Agregar tooltip
+                $(info.el).tooltip({
+                    title: info.event.title,
+                    placement: 'top',
+                    trigger: 'hover',
+                    container: 'body'
+                });
+        
+                // Cambia el estilo del evento
+                $(info.el).css('border-radius', '5px');
+        
+                // Mostrar modal con información detallada
+                {{--  $(info.el).on('click', function() {
+                    $('#modalWizard').modal('show');
+        
+                    // Cargar el contenido del modal
+                    const idAudiencia = info.event.id; // ID del evento
+                    const url = `{{ route('Audiencias.edit', ['idAudiencia' => ':idAudiencia']) }}`.replace(':idAudiencia', idAudiencia);
+        
+                    $('#modalWizard .modal-body').load(url, function(response, status, xhr) {
+                        if (status === "error") {
+                            console.error('Error al cargar el contenido del modal:', xhr.status, xhr.statusText);
+                            return;
+                        }
+                    });
+                });  --}}
+            }
+        });
+        
+        calendario.render();
+
+    });
+</script>

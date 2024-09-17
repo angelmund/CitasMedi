@@ -28,12 +28,16 @@ class Servicio extends Model
 	protected $table = 'servicios';
 
 	protected $casts = [
-		'precio' => 'float'
+		'precio' => 'float',
+		'activo' => 'int'	
+		
 	];
 
 	protected $fillable = [
 		'nombre',
-		'precio'
+		'descripcion',
+		'precio',
+		'activo'
 	];
 
 	public function citas_servicios()

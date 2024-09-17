@@ -12,7 +12,10 @@
         Soft UI Dashboard PRO by Creative Tim
     </title>
 
-
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
     <link href="{{asset('assets/assets/css/nucleo-icons.css')}}" rel="stylesheet" />
@@ -22,6 +25,7 @@
     <link href="{{asset('assets/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
 
     <link id="pagestyle" href="{{asset('assets/assets/css/soft-ui-dashboard.min.css?v=1.0.9')}}" rel="stylesheet" />
+  
 
 
 </head>
@@ -36,6 +40,7 @@
         @include('layouts.nav')
 
         <div class="container-fluid py-4">
+            {{--  @yield('title')  --}}
             @yield('content')
             @include('layouts.footer')
         </div>
@@ -141,7 +146,9 @@
             </div>
         </div>
     </div>
-
+    @include('layouts.modals')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="{{asset('assets/assets/js/core/popper.min.js')}}"></script>
     <script src="{{asset('assets/assets/js/core/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
@@ -489,6 +496,8 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <script src="{{asset('assets/assets/js/soft-ui-dashboard.min.js?v=1.0.9')}}"></script>
+    <!-- DataTables JS -->
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
 </body>
 
 </html>
