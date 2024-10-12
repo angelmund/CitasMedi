@@ -255,6 +255,8 @@ document.addEventListener('DOMContentLoaded', function () {
       locale: 'es',
       timeZone: 'local',
       events: fetchEvents,
+      slotMinTime: '08:00',
+      slotMaxTime: '23:59',
       plugins: [dayGridPlugin, interactionPlugin, listPlugin, timegridPlugin],
       editable: true,
       dragScroll: true,
@@ -269,6 +271,21 @@ document.addEventListener('DOMContentLoaded', function () {
         start: 'sidebarToggle, prev,next, title',
         end: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
       },
+      views: {
+        timeGridDay: { buttonText: 'Día' },
+        dayGridMonth: { buttonText: 'Mes' },
+        timeGridWeek: { buttonText: 'Semana' },
+        timeGrid: {
+            nowIndicator: true,
+            allDaySlot: false,
+            selectable: true,
+            slotLabelFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }
+        }
+    },
       direction: direction,
       initialDate: new Date(),
       navLinks: true, // can click day/week names to navigate views
