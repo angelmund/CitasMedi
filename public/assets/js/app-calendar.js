@@ -252,6 +252,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // ------------------------------------------------
     let calendar = new Calendar(calendarEl, {
       initialView: 'dayGridMonth',
+      locale: 'es',
+      timeZone: 'local',
       events: fetchEvents,
       plugins: [dayGridPlugin, interactionPlugin, listPlugin, timegridPlugin],
       editable: true,
