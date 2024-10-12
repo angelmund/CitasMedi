@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ETC: 'info'
       },
       offcanvasTitle = document.querySelector('.offcanvas-title'),
-      btnToggleSidebar = document.querySelector('.btn-toggle-sidebar'),
+      //btnToggleSidebar = document.querySelector('.btn-toggle-sidebar'),
       btnSubmit = document.querySelector('button[type="submit"]'),
       btnDeleteEvent = document.querySelector('.btn-delete-event'),
       btnCancel = document.querySelector('.btn-cancel'),
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let eventToUpdate,
       currentEvents = events, // Assign app-calendar-events.js file events (assume events from API) to currentEvents (browser store/object) to manage and update calender events
-      isFormValid = false,
-      inlineCalInstance;
+      isFormValid = false;
+      //inlineCalInstance;
 
     // Init event Offcanvas
     const bsAddEventSidebar = new bootstrap.Offcanvas(addEventSidebar);
@@ -139,12 +139,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Inline sidebar calendar (flatpicker)
-    if (inlineCalendar) {
-      inlineCalInstance = inlineCalendar.flatpickr({
-        monthSelectorType: 'static',
-        inline: true
-      });
-    }
+    // if (inlineCalendar) {
+    //   inlineCalInstance = inlineCalendar.flatpickr({
+    //     monthSelectorType: 'static',
+    //     inline: true
+    //   });
+    // }
 
     // Event click function
     function eventClick(info) {
@@ -377,11 +377,11 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
     // Sidebar Toggle Btn
-    if (btnToggleSidebar) {
-      btnToggleSidebar.addEventListener('click', e => {
-        btnCancel.classList.remove('d-none');
-      });
-    }
+    // if (btnToggleSidebar) {
+    //   btnToggleSidebar.addEventListener('click', e => {
+    //     btnCancel.classList.remove('d-none');
+    //   });
+    // }
 
     // Add Event
     // ------------------------------------------------
@@ -543,17 +543,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Hide left sidebar if the right sidebar is open
-    btnToggleSidebar.addEventListener('click', e => {
-      if (offcanvasTitle) {
-        offcanvasTitle.innerHTML = 'Add Event';
-      }
-      btnSubmit.innerHTML = 'Add';
-      btnSubmit.classList.remove('btn-update-event');
-      btnSubmit.classList.add('btn-add-event');
-      btnDeleteEvent.classList.add('d-none');
-      appCalendarSidebar.classList.remove('show');
-      appOverlay.classList.remove('show');
-    });
+    // btnToggleSidebar.addEventListener('click', e => {
+    //   if (offcanvasTitle) {
+    //     offcanvasTitle.innerHTML = 'Add Event';
+    //   }
+    //   btnSubmit.innerHTML = 'Add';
+    //   btnSubmit.classList.remove('btn-update-event');
+    //   btnSubmit.classList.add('btn-add-event');
+    //   btnDeleteEvent.classList.add('d-none');
+    //   appCalendarSidebar.classList.remove('show');
+    //   appOverlay.classList.remove('show');
+    // });
 
     // Calender filter functionality
     // ------------------------------------------------
@@ -580,11 +580,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Jump to date on sidebar(inline) calendar change
-    inlineCalInstance.config.onChange.push(function (date) {
-      calendar.changeView(calendar.view.type, moment(date[0]).format('YYYY-MM-DD'));
-      modifyToggler();
-      appCalendarSidebar.classList.remove('show');
-      appOverlay.classList.remove('show');
-    });
+    // inlineCalInstance.config.onChange.push(function (date) {
+    //   calendar.changeView(calendar.view.type, moment(date[0]).format('YYYY-MM-DD'));
+    //   modifyToggler();
+    //   appCalendarSidebar.classList.remove('show');
+    //   appOverlay.classList.remove('show');
+    // });
   })();
 });
