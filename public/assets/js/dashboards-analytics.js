@@ -5,21 +5,46 @@
 'use strict';
 
 (function () {
-  let cardColor, headingColor, legendColor, labelColor, shadeColor, borderColor;
+  let cardColor, headingColor, labelColor, shadeColor, grayColor;
+  if (isDarkStyle) {
+    cardColor = config.colors_dark.cardColor;
+    labelColor = config.colors_dark.textMuted;
+    headingColor = config.colors_dark.headingColor;
+    shadeColor = 'dark';
+    grayColor = '#5E6692'; // gray color is for stacked bar chart
+  } else {
+    cardColor = config.colors.cardColor;
+    labelColor = config.colors.textMuted;
+    headingColor = config.colors.headingColor;
+    shadeColor = '';
+    grayColor = '#817D8D';
+  }
 
-  cardColor = config.colors.cardColor;
-  headingColor = config.colors.headingColor;
-  legendColor = config.colors.bodyColor;
-  labelColor = config.colors.textMuted;
-  borderColor = config.colors.borderColor;
-
-  // Order Area Chart
+  // swiper loop and autoplay
   // --------------------------------------------------------------------
-  const orderAreaChartEl = document.querySelector('#orderChart'),
-    orderAreaChartConfig = {
+  const swiperWithPagination = document.querySelector('#swiper-with-pagination-cards');
+  if (swiperWithPagination) {
+    new Swiper(swiperWithPagination, {
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false
+      },
+      pagination: {
+        clickable: true,
+        el: '.swiper-pagination'
+      }
+    });
+  }
+
+  // Revenue Generated Area Chart
+  // --------------------------------------------------------------------
+  const revenueGeneratedEl = document.querySelector('#revenueGenerated'),
+    revenueGeneratedConfig = {
       chart: {
-        height: 80,
+        height: 130,
         type: 'area',
+        parentHeightOffset: 0,
         toolbar: {
           show: false
         },
@@ -28,30 +53,11 @@
         }
       },
       markers: {
-        size: 6,
         colors: 'transparent',
-        strokeColors: 'transparent',
-        strokeWidth: 4,
-        discrete: [
-          {
-            fillColor: cardColor,
-            seriesIndex: 0,
-            dataPointIndex: 6,
-            strokeColor: config.colors.success,
-            strokeWidth: 2,
-            size: 6,
-            radius: 8
-          }
-        ],
-        hover: {
-          size: 7
-        }
+        strokeColors: 'transparent'
       },
       grid: {
-        show: false,
-        padding: {
-          right: 8
-        }
+        show: false
       },
       colors: [config.colors.success],
       fill: {
@@ -59,9 +65,8 @@
         gradient: {
           shade: shadeColor,
           shadeIntensity: 0.8,
-          opacityFrom: 0.8,
-          opacityTo: 0.25,
-          stops: [0, 85, 100]
+          opacityFrom: 0.6,
+          opacityTo: 0.1
         }
       },
       dataLabels: {
@@ -73,11 +78,11 @@
       },
       series: [
         {
-          data: [180, 175, 275, 140, 205, 190, 295]
+          data: [300, 350, 330, 380, 340, 400, 380]
         }
       ],
       xaxis: {
-        show: false,
+        show: true,
         lines: {
           show: false
         },
@@ -96,271 +101,124 @@
           width: 0
         },
         show: false
+      },
+      tooltip: {
+        enabled: false
       }
     };
-  if (typeof orderAreaChartEl !== undefined && orderAreaChartEl !== null) {
-    const orderAreaChart = new ApexCharts(orderAreaChartEl, orderAreaChartConfig);
-    orderAreaChart.render();
+  if (typeof revenueGeneratedEl !== undefined && revenueGeneratedEl !== null) {
+    const revenueGenerated = new ApexCharts(revenueGeneratedEl, revenueGeneratedConfig);
+    revenueGenerated.render();
   }
 
-  // Total Revenue Report Chart - Bar Chart
+  // Earning Reports Bar Chart
   // --------------------------------------------------------------------
-  const totalRevenueChartEl = document.querySelector('#totalRevenueChart'),
-    totalRevenueChartOptions = {
-      series: [
-        {
-          name: new Date().getFullYear() - 1,
-
-          data: [18, 7, 15, 29, 18, 12, 9]
-        },
-        {
-          name: new Date().getFullYear() - 2,
-          data: [-13, -18, -9, -14, -5, -17, -15]
-        }
-      ],
+  const weeklyEarningReportsEl = document.querySelector('#weeklyEarningReports'),
+    weeklyEarningReportsConfig = {
       chart: {
-        height: 317,
-        stacked: true,
+        height: 202,
+        parentHeightOffset: 0,
         type: 'bar',
-        toolbar: { show: false }
+        toolbar: {
+          show: false
+        }
       },
       plotOptions: {
         bar: {
-          horizontal: false,
-          columnWidth: '30%',
-          borderRadius: 8,
+          barHeight: '60%',
+          columnWidth: '38%',
           startingShape: 'rounded',
-          endingShape: 'rounded'
-        }
-      },
-      colors: [config.colors.primary, config.colors.info],
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: 'smooth',
-        width: 6,
-        lineCap: 'round',
-        colors: [cardColor]
-      },
-      legend: {
-        show: true,
-        horizontalAlign: 'left',
-        position: 'top',
-        markers: {
-          height: 8,
-          width: 8,
-          radius: 12,
-          offsetX: -5
-        },
-        fontSize: '13px',
-        fontFamily: 'Public Sans',
-        fontWeight: 400,
-        labels: {
-          colors: legendColor,
-          useSeriesColors: false
-        },
-        itemMargin: {
-          horizontal: 10
+          endingShape: 'rounded',
+          borderRadius: 4,
+          distributed: true
         }
       },
       grid: {
-        strokeDashArray: 7,
-        borderColor: borderColor,
+        show: false,
         padding: {
-          top: 0,
-          bottom: -8,
-          left: 20,
-          right: 20
+          top: -30,
+          bottom: 0,
+          left: -10,
+          right: -10
         }
       },
-      fill: {
-        opacity: [1, 1]
+      colors: [
+        config.colors_label.primary,
+        config.colors_label.primary,
+        config.colors_label.primary,
+        config.colors_label.primary,
+        config.colors.primary,
+        config.colors_label.primary,
+        config.colors_label.primary
+      ],
+      dataLabels: {
+        enabled: false
+      },
+      series: [
+        {
+          data: [40, 65, 50, 45, 90, 55, 70]
+        }
+      ],
+      legend: {
+        show: false
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-        labels: {
-          style: {
-            fontSize: '13px',
-            fontFamily: 'Public Sans',
-            colors: labelColor
-          }
+        categories: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+        axisBorder: {
+          show: false
         },
         axisTicks: {
           show: false
         },
-        axisBorder: {
-          show: false
+        labels: {
+          style: {
+            colors: labelColor,
+            fontSize: '13px',
+            fontFamily: 'Public Sans'
+          }
         }
       },
       yaxis: {
         labels: {
-          style: {
-            fontSize: '13px',
-            fontFamily: 'Public Sans',
-            colors: labelColor
-          }
+          show: false
         }
+      },
+      tooltip: {
+        enabled: false
       },
       responsive: [
         {
-          breakpoint: 1700,
+          breakpoint: 1025,
           options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '35%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 1440,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 12,
-                columnWidth: '43%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 1300,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 11,
-                columnWidth: '45%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 1200,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 11,
-                columnWidth: '37%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 1040,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 12,
-                columnWidth: '45%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 991,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 12,
-                columnWidth: '33%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 768,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 11,
-                columnWidth: '28%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 640,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 11,
-                columnWidth: '30%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 576,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '38%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 440,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '50%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 380,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 9,
-                columnWidth: '60%'
-              }
+            chart: {
+              height: 199
             }
           }
         }
-      ],
-      states: {
-        hover: {
-          filter: {
-            type: 'none'
-          }
-        },
-        active: {
-          filter: {
-            type: 'none'
-          }
-        }
-      }
+      ]
     };
-  if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
-    const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
-    totalRevenueChart.render();
+  if (typeof weeklyEarningReportsEl !== undefined && weeklyEarningReportsEl !== null) {
+    const weeklyEarningReports = new ApexCharts(weeklyEarningReportsEl, weeklyEarningReportsConfig);
+    weeklyEarningReports.render();
   }
 
-  // Growth Chart - Radial Bar Chart
+  // Support Tracker - Radial Bar Chart
   // --------------------------------------------------------------------
-  const growthChartEl = document.querySelector('#growthChart'),
-    growthChartOptions = {
-      series: [78],
-      labels: ['Growth'],
+  const supportTrackerEl = document.querySelector('#supportTracker'),
+    supportTrackerOptions = {
+      series: [85],
+      labels: ['Completed Task'],
       chart: {
-        height: 240,
+        height: 360,
         type: 'radialBar'
       },
       plotOptions: {
         radialBar: {
-          size: 150,
           offsetY: 10,
-          startAngle: -150,
-          endAngle: 150,
+          startAngle: -140,
+          endAngle: 130,
           hollow: {
-            size: '55%'
+            size: '65%'
           },
           track: {
             background: cardColor,
@@ -368,17 +226,17 @@
           },
           dataLabels: {
             name: {
-              offsetY: 15,
-              color: legendColor,
-              fontSize: '15px',
-              fontWeight: '500',
+              offsetY: -20,
+              color: labelColor,
+              fontSize: '13px',
+              fontWeight: '400',
               fontFamily: 'Public Sans'
             },
             value: {
-              offsetY: -25,
+              offsetY: 10,
               color: headingColor,
-              fontSize: '22px',
-              fontWeight: '500',
+              fontSize: '38px',
+              fontWeight: '600',
               fontFamily: 'Public Sans'
             }
           }
@@ -398,12 +256,12 @@
         }
       },
       stroke: {
-        dashArray: 5
+        dashArray: 10
       },
       grid: {
         padding: {
-          top: -35,
-          bottom: -10
+          top: -20,
+          bottom: 5
         }
       },
       states: {
@@ -417,385 +275,178 @@
             type: 'none'
           }
         }
-      }
+      },
+      responsive: [
+        {
+          breakpoint: 1025,
+          options: {
+            chart: {
+              height: 330
+            }
+          }
+        },
+        {
+          breakpoint: 769,
+          options: {
+            chart: {
+              height: 280
+            }
+          }
+        }
+      ]
     };
-  if (typeof growthChartEl !== undefined && growthChartEl !== null) {
-    const growthChart = new ApexCharts(growthChartEl, growthChartOptions);
-    growthChart.render();
+  if (typeof supportTrackerEl !== undefined && supportTrackerEl !== null) {
+    const supportTracker = new ApexCharts(supportTrackerEl, supportTrackerOptions);
+    supportTracker.render();
   }
 
-  // Revenue Bar Chart
+  // Total Earning Chart - Bar Chart
   // --------------------------------------------------------------------
-  const revenueBarChartEl = document.querySelector('#revenueChart'),
-    revenueBarChartConfig = {
-      chart: {
-        height: 95,
-        type: 'bar',
-        toolbar: {
-          show: false
+  const totalEarningChartEl = document.querySelector('#totalEarningChart'),
+    totalEarningChartOptions = {
+      series: [
+        {
+          name: 'Earning',
+          data: [15, 10, 20, 8, 12, 18, 12, 5]
+        },
+        {
+          name: 'Expense',
+          data: [-7, -10, -7, -12, -6, -9, -5, -8]
         }
+      ],
+      chart: {
+        height: 230,
+        parentHeightOffset: 0,
+        stacked: true,
+        type: 'bar',
+        toolbar: { show: false }
+      },
+      tooltip: {
+        enabled: false
+      },
+      legend: {
+        show: false
       },
       plotOptions: {
         bar: {
-          barHeight: '80%',
-          columnWidth: '75%',
+          horizontal: false,
+          columnWidth: '18%',
+          borderRadius: 5,
           startingShape: 'rounded',
-          endingShape: 'rounded',
-          borderRadius: 4,
-          distributed: true
+          endingShape: 'rounded'
         }
+      },
+      colors: [config.colors.primary, grayColor],
+      dataLabels: {
+        enabled: false
       },
       grid: {
         show: false,
         padding: {
-          top: -20,
-          bottom: -12,
+          top: -40,
+          bottom: -20,
           left: -10,
-          right: 0
+          right: -2
         }
-      },
-      colors: [
-        config.colors.primary,
-        config.colors.primary,
-        config.colors.primary,
-        config.colors.primary,
-        config.colors.primary,
-        config.colors.primary,
-        config.colors.primary
-      ],
-      dataLabels: {
-        enabled: false
-      },
-      series: [
-        {
-          data: [40, 95, 60, 45, 90, 50, 75]
-        }
-      ],
-      legend: {
-        show: false
       },
       xaxis: {
-        categories: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-        axisBorder: {
+        labels: {
           show: false
         },
         axisTicks: {
           show: false
         },
-        labels: {
-          style: {
-            colors: labelColor,
-            fontSize: '13px'
-          }
-        }
-      },
-      yaxis: {
-        labels: {
-          show: false
-        }
-      }
-    };
-  if (typeof revenueBarChartEl !== undefined && revenueBarChartEl !== null) {
-    const revenueBarChart = new ApexCharts(revenueBarChartEl, revenueBarChartConfig);
-    revenueBarChart.render();
-  }
-
-  // Profit Report Line Chart
-  // --------------------------------------------------------------------
-  const profileReportChartEl = document.querySelector('#profileReportChart'),
-    profileReportChartConfig = {
-      chart: {
-        height: 75,
-        // width: 175,
-        type: 'line',
-        toolbar: {
-          show: false
-        },
-        dropShadow: {
-          enabled: true,
-          top: 10,
-          left: 5,
-          blur: 3,
-          color: config.colors.warning,
-          opacity: 0.15
-        },
-        sparkline: {
-          enabled: true
-        }
-      },
-      grid: {
-        show: false,
-        padding: {
-          right: 8
-        }
-      },
-      colors: [config.colors.warning],
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        width: 5,
-        curve: 'smooth'
-      },
-      series: [
-        {
-          data: [110, 270, 145, 245, 205, 285]
-        }
-      ],
-      xaxis: {
-        show: false,
-        lines: {
-          show: false
-        },
-        labels: {
-          show: false
-        },
         axisBorder: {
           show: false
         }
       },
       yaxis: {
-        show: false
-      }
-    };
-  if (typeof profileReportChartEl !== undefined && profileReportChartEl !== null) {
-    const profileReportChart = new ApexCharts(profileReportChartEl, profileReportChartConfig);
-    profileReportChart.render();
-  }
-
-  // Order Statistics Chart
-  // --------------------------------------------------------------------
-  const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
-    orderChartConfig = {
-      chart: {
-        height: 145,
-        width: 110,
-        type: 'donut'
-      },
-      labels: ['Electronic', 'Sports', 'Decor', 'Fashion'],
-      series: [50, 85, 25, 40],
-      colors: [config.colors.success, config.colors.primary, config.colors.secondary, config.colors.info],
-      stroke: {
-        width: 5,
-        colors: [cardColor]
-      },
-      dataLabels: {
-        enabled: false,
-        formatter: function (val, opt) {
-          return parseInt(val) + '%';
+        labels: {
+          show: false
         }
       },
-      legend: {
-        show: false
-      },
-      grid: {
-        padding: {
-          top: 0,
-          bottom: 0,
-          right: 15
-        }
-      },
-      states: {
-        hover: {
-          filter: { type: 'none' }
+      responsive: [
+        {
+          breakpoint: 1468,
+          options: {
+            plotOptions: {
+              bar: {
+                columnWidth: '22%'
+              }
+            }
+          }
         },
-        active: {
-          filter: { type: 'none' }
-        }
-      },
-      plotOptions: {
-        pie: {
-          donut: {
-            size: '75%',
-            labels: {
-              show: true,
-              value: {
-                fontSize: '18px',
-                fontFamily: 'Public Sans',
-                fontWeight: 500,
-                color: headingColor,
-                offsetY: -17,
-                formatter: function (val) {
-                  return parseInt(val) + '%';
-                }
-              },
-              name: {
-                offsetY: 17,
-                fontFamily: 'Public Sans'
-              },
-              total: {
-                show: true,
-                fontSize: '13px',
-                color: legendColor,
-                label: 'Weekly',
-                formatter: function (w) {
-                  return '38%';
-                }
+        {
+          breakpoint: 1197,
+          options: {
+            chart: {
+              height: 228
+            },
+            plotOptions: {
+              bar: {
+                borderRadius: 8,
+                columnWidth: '26%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 783,
+          options: {
+            chart: {
+              height: 232
+            },
+            plotOptions: {
+              bar: {
+                borderRadius: 6,
+                columnWidth: '28%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 589,
+          options: {
+            plotOptions: {
+              bar: {
+                columnWidth: '16%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 520,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 6,
+                columnWidth: '18%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 426,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 5,
+                columnWidth: '20%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 381,
+          options: {
+            plotOptions: {
+              bar: {
+                columnWidth: '24%'
               }
             }
           }
         }
-      }
-    };
-  if (typeof chartOrderStatistics !== undefined && chartOrderStatistics !== null) {
-    const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
-    statisticsChart.render();
-  }
-
-  // Income Chart - Area chart
-  // --------------------------------------------------------------------
-  const incomeChartEl = document.querySelector('#incomeChart'),
-    incomeChartConfig = {
-      series: [
-        {
-          data: [21, 30, 22, 42, 26, 35, 29]
-        }
       ],
-      chart: {
-        height: 232,
-        parentHeightOffset: 0,
-        parentWidthOffset: 0,
-        toolbar: {
-          show: false
-        },
-        type: 'area'
-      },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        width: 3,
-        curve: 'smooth'
-      },
-      legend: {
-        show: false
-      },
-      markers: {
-        size: 6,
-        colors: 'transparent',
-        strokeColors: 'transparent',
-        strokeWidth: 4,
-        discrete: [
-          {
-            fillColor: config.colors.white,
-            seriesIndex: 0,
-            dataPointIndex: 6,
-            strokeColor: config.colors.primary,
-            strokeWidth: 2,
-            size: 6,
-            radius: 8
-          }
-        ],
-        hover: {
-          size: 7
-        }
-      },
-      colors: [config.colors.primary],
-      fill: {
-        type: 'gradient',
-        gradient: {
-          shade: shadeColor,
-          shadeIntensity: 0.6,
-          opacityFrom: 0.5,
-          opacityTo: 0.25,
-          stops: [0, 95, 100]
-        }
-      },
-      grid: {
-        borderColor: borderColor,
-        strokeDashArray: 8,
-        padding: {
-          top: -20,
-          bottom: -8,
-          left: 0,
-          right: 8
-        }
-      },
-      xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
-        labels: {
-          show: true,
-          style: {
-            fontSize: '13px',
-            colors: labelColor
-          }
-        }
-      },
-      yaxis: {
-        labels: {
-          show: false
-        },
-        min: 10,
-        max: 50,
-        tickAmount: 4
-      }
-    };
-  if (typeof incomeChartEl !== undefined && incomeChartEl !== null) {
-    const incomeChart = new ApexCharts(incomeChartEl, incomeChartConfig);
-    incomeChart.render();
-  }
-
-  // Expenses Mini Chart - Radial Chart
-  // --------------------------------------------------------------------
-  const weeklyExpensesEl = document.querySelector('#expensesOfWeek'),
-    weeklyExpensesConfig = {
-      series: [65],
-      chart: {
-        width: 60,
-        height: 60,
-        type: 'radialBar'
-      },
-      plotOptions: {
-        radialBar: {
-          startAngle: 0,
-          endAngle: 360,
-          strokeWidth: '8',
-          hollow: {
-            margin: 2,
-            size: '40%'
-          },
-          track: {
-            background: borderColor
-          },
-          dataLabels: {
-            show: true,
-            name: {
-              show: false
-            },
-            value: {
-              formatter: function (val) {
-                return '$' + parseInt(val);
-              },
-              offsetY: 5,
-              color: legendColor,
-              fontSize: '12px',
-              fontFamily: 'Public Sans',
-              show: true
-            }
-          }
-        }
-      },
-      fill: {
-        type: 'solid',
-        colors: config.colors.primary
-      },
-      stroke: {
-        lineCap: 'round'
-      },
-      grid: {
-        padding: {
-          top: -10,
-          bottom: -15,
-          left: -10,
-          right: -10
-        }
-      },
       states: {
         hover: {
           filter: {
@@ -809,8 +460,203 @@
         }
       }
     };
-  if (typeof weeklyExpensesEl !== undefined && weeklyExpensesEl !== null) {
-    const weeklyExpenses = new ApexCharts(weeklyExpensesEl, weeklyExpensesConfig);
-    weeklyExpenses.render();
+  if (typeof totalEarningChartEl !== undefined && totalEarningChartEl !== null) {
+    const totalEarningChart = new ApexCharts(totalEarningChartEl, totalEarningChartOptions);
+    totalEarningChart.render();
   }
+
+  //  For Datatable
+  // --------------------------------------------------------------------
+  var dt_projects_table = $('.datatables-projects');
+
+  if (dt_projects_table.length) {
+    var dt_project = dt_projects_table.DataTable({
+      ajax: assetsPath + 'json/user-profile.json',
+      columns: [
+        { data: '' },
+        { data: 'id' },
+        { data: 'project_name' },
+        { data: 'project_leader' },
+        { data: '' },
+        { data: 'status' },
+        { data: '' }
+      ],
+      columnDefs: [
+        {
+          // For Responsive
+          className: 'control',
+          searchable: false,
+          orderable: false,
+          responsivePriority: 2,
+          targets: 0,
+          render: function (data, type, full, meta) {
+            return '';
+          }
+        },
+        {
+          // For Checkboxes
+          targets: 1,
+          orderable: false,
+          searchable: false,
+          responsivePriority: 3,
+          checkboxes: true,
+          render: function () {
+            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+          },
+          checkboxes: {
+            selectAllRender: '<input type="checkbox" class="form-check-input">'
+          }
+        },
+        {
+          // Avatar image/badge, Name and post
+          targets: 2,
+          responsivePriority: 4,
+          render: function (data, type, full, meta) {
+            var $user_img = full['project_img'],
+              $name = full['project_name'],
+              $date = full['date'];
+            if ($user_img) {
+              // For Avatar image
+              var $output =
+                '<img src="' + assetsPath + 'img/icons/brands/' + $user_img + '" alt="Avatar" class="rounded-circle">';
+            } else {
+              // For Avatar badge
+              var stateNum = Math.floor(Math.random() * 6);
+              var states = ['success', 'danger', 'warning', 'info', 'primary', 'secondary'];
+              var $state = states[stateNum],
+                $name = full['project_name'],
+                $initials = $name.match(/\b\w/g) || [];
+              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
+              $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
+            }
+            // Creates full output for row
+            var $row_output =
+              '<div class="d-flex justify-content-left align-items-center">' +
+              '<div class="avatar-wrapper">' +
+              '<div class="avatar me-2">' +
+              $output +
+              '</div>' +
+              '</div>' +
+              '<div class="d-flex flex-column">' +
+              '<span class="text-truncate fw-semibold">' +
+              $name +
+              '</span>' +
+              '<small class="text-truncate text-muted">' +
+              $date +
+              '</small>' +
+              '</div>' +
+              '</div>';
+            return $row_output;
+          }
+        },
+        {
+          // Teams
+          targets: 4,
+          orderable: false,
+          searchable: false,
+          render: function (data, type, full, meta) {
+            var $team = full['team'],
+              $output;
+            $output = '<div class="d-flex align-items-center avatar-group">';
+            for (var i = 0; i < $team.length; i++) {
+              $output +=
+                '<div class="avatar avatar-sm">' +
+                '<img src="' +
+                assetsPath +
+                'img/avatars/' +
+                $team[i] +
+                '" alt="Avatar" class="rounded-circle pull-up">' +
+                '</div>';
+            }
+            $output += '</div>';
+            return $output;
+          }
+        },
+        {
+          // Label
+          targets: -2,
+          render: function (data, type, full, meta) {
+            var $status_number = full['status'];
+            return (
+              '<div class="d-flex align-items-center">' +
+              '<div class="progress w-100 me-3" style="height: 6px;">' +
+              '<div class="progress-bar" style="width: ' +
+              $status_number +
+              '" aria-valuenow="' +
+              $status_number +
+              '" aria-valuemin="0" aria-valuemax="100"></div>' +
+              '</div>' +
+              '<span>' +
+              $status_number +
+              '</span></div>'
+            );
+          }
+        },
+        {
+          // Actions
+          targets: -1,
+          searchable: false,
+          title: 'Actions',
+          orderable: false,
+          render: function (data, type, full, meta) {
+            return (
+              '<div class="d-inline-block">' +
+              '<a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></a>' +
+              '<div class="dropdown-menu dropdown-menu-end m-0">' +
+              '<a href="javascript:;" class="dropdown-item">Details</a>' +
+              '<a href="javascript:;" class="dropdown-item">Archive</a>' +
+              '<div class="dropdown-divider"></div>' +
+              '<a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>' +
+              '</div>' +
+              '</div>'
+            );
+          }
+        }
+      ],
+      order: [[2, 'desc']],
+      dom: '<"card-header pb-0 pt-sm-0"<"head-label text-center"><"d-flex justify-content-center justify-content-md-end"f>>t<"row mx-2"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      displayLength: 5,
+      lengthMenu: [5, 10, 25, 50, 75, 100],
+      responsive: {
+        details: {
+          display: $.fn.dataTable.Responsive.display.modal({
+            header: function (row) {
+              var data = row.data();
+              return 'Details of "' + data['project_name'] + '" Project';
+            }
+          }),
+          type: 'column',
+          renderer: function (api, rowIdx, columns) {
+            var data = $.map(columns, function (col, i) {
+              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+                ? '<tr data-dt-row="' +
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
+                : '';
+            }).join('');
+
+            return data ? $('<table class="table"/><tbody />').append(data) : false;
+          }
+        }
+      }
+    });
+    $('div.head-label').html('<h5 class="card-title mb-0">Projects</h5>');
+  }
+
+  // Filter form control to default size
+  // ? setTimeout used for multilingual table initialization
+  setTimeout(() => {
+    $('.dataTables_filter .form-control').removeClass('form-control-sm');
+    $('.dataTables_length .form-select').removeClass('form-select-sm');
+  }, 300);
 })();

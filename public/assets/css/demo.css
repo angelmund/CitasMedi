@@ -3,35 +3,41 @@
 * File include item demo only specific css only
 ******************************************************************************/
 
-.menu .app-brand.demo {
+.light-style .menu .app-brand.demo {
   height: 64px;
-  margin-top: 12px;
+}
+
+.dark-style .menu .app-brand.demo {
+  height: 64px;
+}
+
+.app-brand-logo.demo {
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  display: -ms-flexbox;
+  display: flex;
+  width: 34px;
+  height: 24px;
 }
 
 .app-brand-logo.demo svg {
-  width: 22px;
-  height: 38px;
+  width: 35px;
+  height: 24px;
 }
 
 .app-brand-text.demo {
-  font-size: 1.75rem;
-  letter-spacing: -0.5px;
+  font-size: 1.375rem;
 }
 
-/* ! For .layout-navbar-fixed added fix padding top to .layout-page */
-/* Detached navbar */
-.layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
-  padding-top: 74px !important;
-}
-/* Default navbar */
+/* ! For .layout-navbar-fixed added fix padding top tpo .layout-page */
 .layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
   padding-top: 64px !important;
 }
-.docs-page .layout-navbar-fixed.layout-wrapper:not(.layout-without-menu) .layout-page,
-.docs-page .layout-menu-fixed.layout-wrapper:not(.layout-without-menu) .layout-page {
-  padding-top: 62px !important;
+.layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
+  padding-top: 78px !important;
 }
-
 /* Navbar page z-index issue solution */
 .content-wrapper .navbar {
   z-index: auto;
@@ -82,19 +88,6 @@
 
 [dir='rtl'] .rtl-only {
   display: block !important;
-}
-
-/* Dropdown buttons going out of small screens */
-@media (max-width: 576px) {
-  #dropdown-variation-demo .btn-group .text-truncate {
-    width: 231px;
-    position: relative;
-  }
-  #dropdown-variation-demo .btn-group .text-truncate::after {
-    position: absolute;
-    top: 45%;
-    right: 0.65rem;
-  }
 }
 
 /*
