@@ -240,8 +240,8 @@
 
         </div>
     </div>
-    <!-- Content -->
-
+    
+    @include('layouts.modals')
 
 
     <!-- Core JS -->

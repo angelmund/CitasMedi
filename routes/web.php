@@ -43,3 +43,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/Servicios/create', [App\Http\Controllers\ServiciosController::class, 'create'])->name('Servicios.create');
    
 });
+
+//****************   Citas ********** */
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/Citas', [App\Http\Controllers\CitasController::class, 'index'])->name('Citas.index');
+    Route::get('/Citas/create', [App\Http\Controllers\CitasController::class, 'create'])->name('Citas.create');
+   
+});

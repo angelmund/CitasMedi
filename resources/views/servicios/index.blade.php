@@ -12,7 +12,7 @@
     </button>
 
   
-        <div class="dropdown d-flex justify-content-end">
+        {{--  <div class="dropdown d-flex justify-content-end">
             <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               Exportar
             </button>
@@ -20,7 +20,7 @@
                 <li><a class="dropdown-item" href="javascript:;" id="exportExcel"><i class="fas fa-file-excel me-50 font-small-4 text-success"></i> Excel</a></li>
                 <li><a class="dropdown-item" href="javascript:;" id="exportPdf"><i class="fas fa-file-pdf me-50 font-small-4 text-danger"></i> PDF</a></li>
             </ul>
-        </div>
+        </div>  --}}
         
     </div>
     <div class="card-body">
@@ -81,8 +81,8 @@
                     sInfoThousands: ',',
                     sLoadingRecords: 'Cargando...',
                     oPaginate: {
-                        {{--  sFirst: 'Primero',  --}}
-                        {{--  sLast: 'Último',  --}}
+                        sFirst: 'Primero',
+                        sLast: 'Último',
                         sNext: 'Siguiente',
                         sPrevious: 'Anterior'
                     },

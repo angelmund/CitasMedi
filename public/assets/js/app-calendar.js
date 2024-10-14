@@ -37,13 +37,13 @@ document.addEventListener('DOMContentLoaded', function () {
       btnCancel = document.querySelector('.btn-cancel'),
       eventTitle = document.querySelector('#eventTitle'),
       eventStartDate = document.querySelector('#eventStartDate'),
-      eventEndDate = document.querySelector('#eventEndDate'),
-      eventUrl = document.querySelector('#eventURL'),
+      // eventEndDate = document.querySelector('#eventEndDate'),
+      // eventUrl = document.querySelector('#eventURL'),
       eventLabel = $('#eventLabel'), // ! Using jquery vars due to select2 jQuery dependency
       eventGuests = $('#eventGuests'), // ! Using jquery vars due to select2 jQuery dependency
-      eventLocation = document.querySelector('#eventLocation'),
-      eventDescription = document.querySelector('#eventDescription'),
-      allDaySwitch = document.querySelector('.allDay-switch'),
+      // eventLocation = document.querySelector('#eventLocation'),
+      // eventDescription = document.querySelector('#eventDescription'),
+      // allDaySwitch = document.querySelector('.allDay-switch'),
       selectAll = document.querySelector('.select-all'),
       filterInput = [].slice.call(document.querySelectorAll('.input-filter')),
       inlineCalendar = document.querySelector('.inline-calendar');
@@ -113,30 +113,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Event start (flatpicker)
-    if (eventStartDate) {
-      var start = eventStartDate.flatpickr({
-        enableTime: true,
-        altFormat: 'Y-m-dTH:i:S',
-        onReady: function (selectedDates, dateStr, instance) {
-          if (instance.isMobile) {
-            instance.mobileInput.setAttribute('step', null);
-          }
-        }
-      });
-    }
+    // if (eventStartDate) {
+    //   var start = eventStartDate.flatpickr({
+    //     enableTime: true,
+    //     altFormat: 'Y-m-dTH:i:S',
+    //     onReady: function (selectedDates, dateStr, instance) {
+    //       if (instance.isMobile) {
+    //         instance.mobileInput.setAttribute('step', null);
+    //       }
+    //     }
+    //   });
+    // }
 
     // Event end (flatpicker)
-    if (eventEndDate) {
-      var end = eventEndDate.flatpickr({
-        enableTime: true,
-        altFormat: 'Y-m-dTH:i:S',
-        onReady: function (selectedDates, dateStr, instance) {
-          if (instance.isMobile) {
-            instance.mobileInput.setAttribute('step', null);
-          }
-        }
-      });
-    }
+    // if (eventEndDate) {
+    //   var end = eventEndDate.flatpickr({
+    //     enableTime: true,
+    //     altFormat: 'Y-m-dTH:i:S',
+    //     onReady: function (selectedDates, dateStr, instance) {
+    //       if (instance.isMobile) {
+    //         instance.mobileInput.setAttribute('step', null);
+    //       }
+    //     }
+    //   });
+    // }
 
     // Inline sidebar calendar (flatpicker)
     // if (inlineCalendar) {
@@ -165,20 +165,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
       eventTitle.value = eventToUpdate.title;
       start.setDate(eventToUpdate.start, true, 'Y-m-d');
-      eventToUpdate.allDay === true ? (allDaySwitch.checked = true) : (allDaySwitch.checked = false);
+      // eventToUpdate.allDay === true ? (allDaySwitch.checked = true) : (allDaySwitch.checked = false);
       eventToUpdate.end !== null
         ? end.setDate(eventToUpdate.end, true, 'Y-m-d')
         : end.setDate(eventToUpdate.start, true, 'Y-m-d');
       eventLabel.val(eventToUpdate.extendedProps.calendar).trigger('change');
       eventToUpdate.extendedProps.location !== undefined
-        ? (eventLocation.value = eventToUpdate.extendedProps.location)
-        : null;
+        // ? (eventLocation.value = eventToUpdate.extendedProps.location)
+        // : null;
       eventToUpdate.extendedProps.guests !== undefined
         ? eventGuests.val(eventToUpdate.extendedProps.guests).trigger('change')
         : null;
-      eventToUpdate.extendedProps.description !== undefined
-        ? (eventDescription.value = eventToUpdate.extendedProps.description)
-        : null;
+      // eventToUpdate.extendedProps.description !== undefined
+      //   ? (eventDescription.value = eventToUpdate.extendedProps.description)
+      //   : null;
 
       // // Call removeEvent function
       // btnDeleteEvent.addEventListener('click', e => {
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
       timeZone: 'local',
       events: fetchEvents,
       slotMinTime: '08:00',
-      slotMaxTime: '23:59',
+      slotMaxTime: '20:59',
       plugins: [dayGridPlugin, interactionPlugin, listPlugin, timegridPlugin],
       editable: true,
       dragScroll: true,
@@ -296,6 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       dateClick: function (info) {
         let date = moment(info.date).format('YYYY-MM-DD');
+        // $('#modalWizard').modal('show');
         resetValues();
         bsAddEventSidebar.show();
 
@@ -308,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
         btnSubmit.classList.add('btn-add-event');
         btnDeleteEvent.classList.add('d-none');
         eventStartDate.value = date;
-        eventEndDate.value = date;
+        // eventEndDate.value = date;
       },
       eventClick: function (info) {
         eventClick(info);
@@ -336,20 +337,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           }
         },
-        eventStartDate: {
-          validators: {
-            notEmpty: {
-              message: 'Please enter start date '
-            }
-          }
-        },
-        eventEndDate: {
-          validators: {
-            notEmpty: {
-              message: 'Please enter end date '
-            }
-          }
-        }
+        // eventStartDate: {
+        //   validators: {
+        //     notEmpty: {
+        //       message: 'Please enter start date '
+        //     }
+        //   }
+        // },
+        // eventEndDate: {
+        //   validators: {
+        //     notEmpty: {
+        //       message: 'Please enter end date '
+        //     }
+        //   }
+        // }
       },
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
@@ -470,24 +471,24 @@ document.addEventListener('DOMContentLoaded', function () {
           let newEvent = {
             id: calendar.getEvents().length + 1,
             title: eventTitle.value,
-            start: eventStartDate.value,
-            end: eventEndDate.value,
-            startStr: eventStartDate.value,
-            endStr: eventEndDate.value,
+            // start: eventStartDate.value,
+            // end: eventEndDate.value,
+            // startStr: eventStartDate.value,
+            // endStr: eventEndDate.value,
             display: 'block',
             extendedProps: {
-              location: eventLocation.value,
+              // location: eventLocation.value,
               guests: eventGuests.val(),
               calendar: eventLabel.val(),
-              description: eventDescription.value
+              // description: eventDescription.value
             }
           };
-          if (eventUrl.value) {
-            newEvent.url = eventUrl.value;
-          }
-          if (allDaySwitch.checked) {
-            newEvent.allDay = true;
-          }
+          // if (eventUrl.value) {
+          //   newEvent.url = eventUrl.value;
+          // }
+          // if (allDaySwitch.checked) {
+          //   newEvent.allDay = true;
+          // }
           addEvent(newEvent);
           bsAddEventSidebar.hide();
         }
@@ -498,17 +499,17 @@ document.addEventListener('DOMContentLoaded', function () {
           let eventData = {
             id: eventToUpdate.id,
             title: eventTitle.value,
-            start: eventStartDate.value,
-            end: eventEndDate.value,
-            url: eventUrl.value,
+            // start: eventStartDate.value,
+            // end: eventEndDate.value,
+            // url: eventUrl.value,
             extendedProps: {
-              location: eventLocation.value,
+              // location: eventLocation.value,
               guests: eventGuests.val(),
               calendar: eventLabel.val(),
-              description: eventDescription.value
+              // description: eventDescription.value
             },
             display: 'block',
-            allDay: allDaySwitch.checked ? true : false
+            // allDay: allDaySwitch.checked ? true : false
           };
 
           updateEvent(eventData);
@@ -527,14 +528,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // Reset event form inputs values
     // ------------------------------------------------
     function resetValues() {
-      eventEndDate.value = '';
-      eventUrl.value = '';
+      //eventEndDate.value = '';
+     // eventUrl.value = '';
       eventStartDate.value = '';
       eventTitle.value = '';
-      eventLocation.value = '';
-      allDaySwitch.checked = false;
+     // eventLocation.value = '';
+      //allDaySwitch.checked = false;
+      eventLabel.val('').trigger('change');
       eventGuests.val('').trigger('change');
-      eventDescription.value = '';
+      // eventDescription.value = '';
     }
 
     // When modal hides reset input values
