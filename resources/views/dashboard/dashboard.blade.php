@@ -5,55 +5,83 @@
 @endsection
 <style>
     /* From Uiverse.io by kamehame-ha */ 
-.cards {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .cards .red {
-    background-color: #f43f5e;
-  }
-  
-  .cards .blue {
-    background-color: #3b82f6;
-  }
-  
-  .cards .green {
-    background-color: #22c55e;
-  }
-  
-  .cards .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    height: 100px;
-    width: 250px;
-    border-radius: 10px;
+    .cards {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between;
+    /* gap: 20px;
+    padding: 15px; */
+}
+
+.cards .card {
+    height: 150px;
+    width: 100%; 
+    max-width: 220px;
+    border-radius: 12px;
     color: white;
+    text-align: center;
     cursor: pointer;
-    transition: 400ms;
-  }
-  
-  .cards .card p.tip {
-    font-size: 1em;
-    font-weight: 700;
-  }
-  
-  .cards .card p.second-text {
-    font-size: .7em;
-  }
-  
-  .cards .card:hover {
-    transform: scale(1.1, 1.1);
-  }
-  
-  .cards:hover > .card:not(:hover) {
-    filter: blur(10px);
-    transform: scale(0.9, 0.9);
-  }
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Estilo del texto */
+.cards .card p.tip {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.cards .card p.second-text {
+    font-size: 0.9em;
+    opacity: 0.85;
+
+}
+
+
+.cards .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cards:hover > .card:not(:hover) {
+    filter: blur(3px) !important;
+    transform: scale(0.95) !important;
+}
+
+
+
+.cards .red {
+    background-color: #f87171; 
+}
+
+.cards .blue {
+    background-color: #60a5fa; 
+}
+
+.cards .green {
+    background-color: #4ade80; 
+}
+.cards .yellow {
+    background-color: #fbbf24; 
+}
+.cards .purple {
+    background-color: #8b5cf6;
+}
+
+.cards .orange {
+    background-color: #f97316; 
+}
+
+.cards .pink {
+    background-color: #f472b6; 
+}
+
+.grid-center {
+    display: grid;
+    place-items: center;
+}
 </style>
 @section('content')
 
@@ -61,15 +89,7 @@
     <div class="row g-0">
         <!-- Calendar Sidebar -->
         <div class="col app-calendar-sidebar" id="app-calendar-sidebar">
-            <div class="border-bottom p-4 my-sm-0 mb-3">
-                <div class="d-grid">
-                    <button class="btn btn-primary btn-toggle-sidebar" data-bs-toggle="offcanvas"
-                        data-bs-target="#addEventSidebar" aria-controls="addEventSidebar">
-                        <i class="ti ti-plus me-1"></i>
-                        <span class="align-middle">Agregar Cita</span>
-                    </button>
-                </div>
-            </div>
+    
             <div class="p-3">
                 <!-- inline calendar (flatpicker) -->
                 <div class="inline-calendar"></div>
@@ -78,15 +98,14 @@
 
                 <!-- Filter -->
                 <div class="mb-3 ms-3">
-                    <small class="text-small text-muted text-uppercase align-middle">Filter</small>
+                    <small class="text-small text-muted text-uppercase align-middle">Filtro</small>
                 </div>
 
                 <div class="form-check mb-2 ms-3">
                     <input class="form-check-input select-all" type="checkbox" id="selectAll" data-value="all"
                         checked />
-                    <label class="form-check-label" for="selectAll">Ver Todo</label>
+                    <label class="form-check-label" for="selectAll">VER TODO</label>
                 </div>
-                {{-- Nota: agregar el campo color a la BD para que podamos darle al usuario la facilidad de poner el color que quiera desde que se introduzca un servicio --}}
                 <div class="app-calendar-events-filter ms-3">
                     @foreach ($servicios as $servicio)
                     <div class="form-check form-check-{{ $servicio->color }} mb-2">
@@ -132,22 +151,25 @@
                                 placeholder="Por favor, describa el motivo de su cita" rows="3"></textarea>
                         </div>
                        
-                            @foreach ($servicios as $servicio)
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2 cards">
-                                <div class="card red">
-                                    <p class="tip">{{$servicio->nombre}}</p>
-                                    <p class="second-text">{{$servicio->descripcion}}</p>
-                                </div>
-                                <div class="card blue">
-                                    <p class="tip">{{$servicio->nombre}}</p>
-                                    <p class="second-text">{{$servicio->descripcion}}</p>
-                                </div>
-                                <div class="card green">
-                                    <p class="tip">{{$servicio->nombre}}</p>
-                                    <p class="second-text">{{$servicio->descripcion}}</p>
-                                </div>
+                        <div class="row cards">
+                            <div class="mb-3">
+                                <label class="form-label" for="eventTitle">Servicios</label>
                             </div>
+                            @foreach ($servicios as $servicio)
+                                <div class="col-12 col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center align-items-center">
+                                    <div class="card {{ ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink'][$loop->index % 7] }} grid-center">
+                                        <div class="mh-100">
+                                            <p class="tip">{{ $servicio->nombre }}</p>
+                                            <p class="second-text my-2">{{ $servicio->descripcion }}</p>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
                             @endforeach
+                        </div>
+                        
+                        
+                        
                        
                         {{--  <div class="mb-3">
                             <label class="form-label" for="eventLabel">Servicio (S)</label>
@@ -201,6 +223,7 @@
                             <label class="form-label" for="eventDescription">Description</label>
                             <textarea class="form-control" name="eventDescription" id="eventDescription"></textarea>
                         </div> --}}
+
                         <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
                             <div>
                                 <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Add</button>
@@ -326,6 +349,8 @@
 });
 
 calendario.render();
+
+
 
 </script>
 
