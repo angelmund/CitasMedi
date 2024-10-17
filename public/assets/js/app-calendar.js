@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         Family: 'warning',
         ETC: 'info'
       },
-      offcanvasTitle = document.querySelector('.offcanvas-title'),
+      // offcanvasTitle = document.querySelector('.offcanvas-title'),
       //btnToggleSidebar = document.querySelector('.btn-toggle-sidebar'),
       btnSubmit = document.querySelector('button[type="submit"]'),
       btnDeleteEvent = document.querySelector('.btn-delete-event'),
@@ -155,9 +155,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       bsAddEventSidebar.show();
       // For update event set offcanvas title text: Update Event
-      if (offcanvasTitle) {
-        offcanvasTitle.innerHTML = 'Update Event';
-      }
+      // if (offcanvasTitle) {
+      //   offcanvasTitle.innerHTML = 'Update Event';
+      // }
       btnSubmit.innerHTML = 'Update';
       btnSubmit.classList.add('btn-update-event');
       btnSubmit.classList.remove('btn-add-event');
@@ -301,10 +301,10 @@ document.addEventListener('DOMContentLoaded', function () {
         bsAddEventSidebar.show();
 
         // For new event set offcanvas title text: Add Event
-        if (offcanvasTitle) {
-          offcanvasTitle.innerHTML = 'Add Event';
-        }
-        btnSubmit.innerHTML = 'Add';
+        // if (offcanvasTitle) {
+        //   offcanvasTitle.innerHTML = 'Agendar Cita';
+        // }
+        btnSubmit.innerHTML = 'Agregar';
         btnSubmit.classList.remove('btn-update-event');
         btnSubmit.classList.add('btn-add-event');
         btnDeleteEvent.classList.add('d-none');

@@ -3,7 +3,58 @@
 @section('title')
 <h4 class="fw-bold py-3">{{ __('Dashboard') }}</h4>
 @endsection
-
+<style>
+    /* From Uiverse.io by kamehame-ha */ 
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .cards .red {
+    background-color: #f43f5e;
+  }
+  
+  .cards .blue {
+    background-color: #3b82f6;
+  }
+  
+  .cards .green {
+    background-color: #22c55e;
+  }
+  
+  .cards .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100px;
+    width: 250px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 400ms;
+  }
+  
+  .cards .card p.tip {
+    font-size: 1em;
+    font-weight: 700;
+  }
+  
+  .cards .card p.second-text {
+    font-size: .7em;
+  }
+  
+  .cards .card:hover {
+    transform: scale(1.1, 1.1);
+  }
+  
+  .cards:hover > .card:not(:hover) {
+    filter: blur(10px);
+    transform: scale(0.9, 0.9);
+  }
+</style>
 @section('content')
 
 <div class="card app-calendar-wrapper">
@@ -80,7 +131,8 @@
             <div class="offcanvas offcanvas-end event-sidebar" tabindex="-1" id="addEventSidebar"
                 aria-labelledby="addEventSidebarLabel">
                 <div class="offcanvas-header my-1">
-                    <h5 class="offcanvas-title" id="addEventSidebarLabel">Agendar Cita</h5>
+                    <h5 class="offcanvas-title text-center" id="addEventSidebarLabel"><i class="fas fa-calendar"></i>
+                        Agendar Cita</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -89,21 +141,42 @@
                         <div class="mb-3">
                             <label class="form-label" for="eventStartDate">Fecha de cita</label>
                             <input type="date" class="form-control" id="eventStartDate" name="eventStartDate"
-                                placeholder="Fecha"  disabled/>
+                                placeholder="Fecha" disabled />
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="eventTitle">Motivo de la cita</label>
-                            <textarea class="form-control" id="eventTitle" name="eventTitle" placeholder="Por favor, describa el motivo de su cita" rows="3"></textarea>
+                            <textarea class="form-control" id="eventTitle" name="eventTitle"
+                                placeholder="Por favor, describa el motivo de su cita" rows="3"></textarea>
                         </div>
-                        <div class="mb-3">
+                       
+                            @foreach ($servicios as $servicio)
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2 cards">
+                                <div class="card red">
+                                    <p class="tip">{{$servicio->nombre}}</p>
+                                    <p class="second-text">{{$servicio->descripcion}}</p>
+                                </div>
+                                <div class="card blue">
+                                    <p class="tip">{{$servicio->nombre}}</p>
+                                    <p class="second-text">{{$servicio->descripcion}}</p>
+                                </div>
+                                <div class="card green">
+                                    <p class="tip">{{$servicio->nombre}}</p>
+                                    <p class="second-text">{{$servicio->descripcion}}</p>
+                                </div>
+                            </div>
+                            @endforeach
+                       
+                        {{--  <div class="mb-3">
                             <label class="form-label" for="eventLabel">Servicio (S)</label>
-                            <select class="select2 select-event-label form-select" id="eventLabel"  name="states[]" multiple="multiple">
+                            <select class="select2 select-event-label form-select" id="eventLabel" name="states[]"
+                                multiple="multiple">
                                 @foreach ($servicios as $servicio)
-                                <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
+                                <option value="{{ $servicio->id }}">{{ $servicio->nombre }}/descipci&oacute;n: {{
+                                    $servicio->descripcion }}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        
+                        </div>  --}}
+
                         {{-- <div class="mb-3">
                             <label class="form-label" for="eventEndDate">End Date</label>
                             <input type="text" class="form-control" id="eventEndDate" name="eventEndDate"
@@ -141,10 +214,10 @@
                             <input type="text" class="form-control" id="eventLocation" name="eventLocation"
                                 placeholder="Enter Location" />
                         </div> --}}
-                        {{--  <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label" for="eventDescription">Description</label>
                             <textarea class="form-control" name="eventDescription" id="eventDescription"></textarea>
-                        </div>  --}}
+                        </div> --}}
                         <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
                             <div>
                                 <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Add</button>
