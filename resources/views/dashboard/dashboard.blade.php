@@ -9,13 +9,13 @@
 <div class="card app-calendar-wrapper">
     <div class="row g-0">
         <!-- Calendar Sidebar -->
-        {{-- <div class="col app-calendar-sidebar" id="app-calendar-sidebar">
+        <div class="col app-calendar-sidebar" id="app-calendar-sidebar">
             <div class="border-bottom p-4 my-sm-0 mb-3">
                 <div class="d-grid">
                     <button class="btn btn-primary btn-toggle-sidebar" data-bs-toggle="offcanvas"
                         data-bs-target="#addEventSidebar" aria-controls="addEventSidebar">
                         <i class="ti ti-plus me-1"></i>
-                        <span class="align-middle">Add Event</span>
+                        <span class="align-middle">Agregar Cita</span>
                     </button>
                 </div>
             </div>
@@ -33,38 +33,21 @@
                 <div class="form-check mb-2 ms-3">
                     <input class="form-check-input select-all" type="checkbox" id="selectAll" data-value="all"
                         checked />
-                    <label class="form-check-label" for="selectAll">View All</label>
+                    <label class="form-check-label" for="selectAll">Ver Todo</label>
                 </div>
-
+                {{-- Nota: agregar el campo color a la BD para que podamos darle al usuario la facilidad de poner el color que quiera desde que se introduzca un servicio --}}
                 <div class="app-calendar-events-filter ms-3">
-                    <div class="form-check form-check-danger mb-2">
-                        <input class="form-check-input input-filter" type="checkbox" id="select-personal"
-                            data-value="personal" checked />
-                        <label class="form-check-label" for="select-personal">Personal</label>
+                    @foreach ($servicios as $servicio)
+                    <div class="form-check form-check-{{ $servicio->color }} mb-2">
+                        <input class="form-check-input input-filter" type="checkbox" id="select-{{ $servicio->id }}"
+                            data-value="{{ $servicio->id }}" checked />
+                        <label class="form-check-label" for="select-{{ $servicio->id }}">{{ $servicio->nombre }}</label>
                     </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input input-filter" type="checkbox" id="select-business"
-                            data-value="business" checked />
-                        <label class="form-check-label" for="select-business">Business</label>
-                    </div>
-                    <div class="form-check form-check-warning mb-2">
-                        <input class="form-check-input input-filter" type="checkbox" id="select-family"
-                            data-value="family" checked />
-                        <label class="form-check-label" for="select-family">Family</label>
-                    </div>
-                    <div class="form-check form-check-success mb-2">
-                        <input class="form-check-input input-filter" type="checkbox" id="select-holiday"
-                            data-value="holiday" checked />
-                        <label class="form-check-label" for="select-holiday">Holiday</label>
-                    </div>
-                    <div class="form-check form-check-info">
-                        <input class="form-check-input input-filter" type="checkbox" id="select-etc" data-value="etc"
-                            checked />
-                        <label class="form-check-label" for="select-etc">ETC</label>
-                    </div>
+                    @endforeach
                 </div>
+                
             </div>
-        </div> --}}
+        </div>
         <!-- /Calendar Sidebar -->
 
         <!-- Calendar & Modal -->
