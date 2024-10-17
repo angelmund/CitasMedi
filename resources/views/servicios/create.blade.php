@@ -1,10 +1,33 @@
-<form>
-    <div class="form-group">
-        <label for="recipient-name" class="col-form-label">Recipient:</label>
-        <input type="text" class="form-control" value="Creative Tim" id="recipient-name">
+<div class="text-center mb-2">
+  <h1 class="mb-1 modal-title" id="createModalLabel">Agregar Servicio</h1>
+</div>
+
+
+<form id="createServiceForm" method="POST" action="{{ route('Servicios.store') }}">
+  @csrf
+  <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Nombre del servicio">
+  </div>
+  <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="precio">Precio</label>
+        <input type="number" class="form-control" id="precio" name="precio" required placeholder="Precio del servicio">
+      </div>
     </div>
-    <div class="form-group">
-        <label for="message-text" class="col-form-label">Message:</label>
-        <textarea class="form-control" id="message-text"></textarea>
+    <div class="col">
+      <div class="form-group">
+        <label for="color">Color</label>
+        <div id="color-picker" class="color-picker"></div>
+        <input type="hidden" id="color" name="color" required>
+      </div>
     </div>
+    
+  </div>
 </form>

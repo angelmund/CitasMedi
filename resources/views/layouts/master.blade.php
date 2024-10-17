@@ -177,7 +177,8 @@
     <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
     <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
-
+    <!-- Pickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
     <!-- Core CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
@@ -194,8 +195,7 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
-    <link rel="stylesheet"
-        href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 
     
     <!---iconos-->
@@ -272,10 +272,14 @@
 
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/JSgeneral/general.js') }}"></script>
 
     <!-- Page JS -->
     <script src="../../assets/js/app-calendar-events.js"></script>
     <script src="../../assets/js/app-calendar.js"></script>
+    <!-- Pickr JS -->
+   <!-- Al final del archivo Blade, justo antes de cerrar el body -->
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.8.2/dist/pickr.min.js"></script>
 </body>
 
 </html>

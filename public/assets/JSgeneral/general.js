@@ -2,34 +2,79 @@
 // agregar data-title, al boton donde se agrega el data-remote, para asignarle el titulo al modal
 // están contenidos en modals.blade.php
 // no-action fue agregado solo al modal de cerrar sesión, ya que ese es fijo
+
+
+// $('.modal').on('show.bs.modal', function (e) {
+//     var modal = $(this);
+//     var button = $(e.relatedTarget);
+//     modal.find('.modal-body').load(button.data('remote'));
+//     modal.find('form').attr('onsubmit', 'return false;');
+// });
+
+// $('.modal').on('hide.bs.modal', function (e) {
+//     var modal = $(this);
+//     if (modal.data('no-action') == undefined){
+//         modal.find('.modal-title').text('');
+//         modal.find('.modal-body').html('');
+//     }
+// });
+
+
 $('.modal').on('show.bs.modal', function (e) {
     var modal = $(this);
     var button = $(e.relatedTarget);
-    modal.find('.modal-body').load(button.data('remote'));
-    modal.find('form').attr('onsubmit', 'return false;');
+    
+   
+    modal.find('.modal-body').load(button.data('remote'), function () {
+        initializeColorPicker(); 
+        modal.find('form').attr('onsubmit', 'return false;');
+    });
 });
 
 $('.modal').on('hide.bs.modal', function (e) {
     var modal = $(this);
-    if (modal.data('no-action') == undefined){
+    if (modal.data('no-action') == undefined) {
         modal.find('.modal-title').text('');
         modal.find('.modal-body').html('');
     }
 });
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     const observer = new MutationObserver(function(mutations) {
-//         mutations.forEach(function(mutation) {
-//             mutation.addedNodes.forEach(function(node) {
-//                 if (node.tagName === 'FORM') {
-//                     node.setAttribute('onsubmit', 'return false');
-//                 }
-//             });
-//         });
-//     });
+let pickr; 
 
-//     observer.observe(document.body, { childList: true, subtree: true });
-// });
+function initializeColorPicker() {
+    if (pickr) pickr.destroy(); 
+
+    const colorPickerElement = document.getElementById('color-picker');
+    const colorInput = document.getElementById('color');
+
+    if (!colorPickerElement) {
+        console.warn('No se encontró el elemento #color-picker pidele ayuda a Dios');
+        return;
+    }
+
+    pickr = Pickr.create({
+        el: '#color-picker',
+        theme: 'nano', 
+        default: '#60a5fa', 
+        components: {
+            preview: true,
+            opacity: true,
+            hue: true,
+            interaction: {
+                hex: true,
+                rgba: false,
+                input: true,
+                clear: false,
+                save: true,
+            }
+        }
+    });
+
+    pickr.on('save', (color) => {
+        colorInput.value = color.toHEXA().toString(); // Creo que este valor es el que podria servir para guardar el color manda el HEX a string
+    });
+}
+
 
 function validaformulario(opcion)
 {
@@ -144,4 +189,3 @@ function confirSave(titulo,callback) {
         }
     });
 }
-

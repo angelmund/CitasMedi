@@ -226,13 +226,13 @@
 
                         <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
                             <div>
-                                <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Add</button>
+                                <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Agregar</button>
                                 <button type="reset" class="btn btn-label-secondary btn-cancel me-sm-0 me-1"
                                     data-bs-dismiss="offcanvas">
-                                    Cancel
+                                    Cancelar
                                 </button>
                             </div>
-                            <div><button class="btn btn-label-danger btn-delete-event d-none">Delete</button></div>
+                            <div><button class="btn btn-label-danger btn-delete-event d-none">Borrar</button></div>
                         </div>
                     </form>
                 </div>

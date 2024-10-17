@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Limpiar caché
+Route::get('/clear', function () {
+    Artisan::call('config:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('optimize:clear');
+
+    return "¡Cache limpio!";
+});
 
 Route::get('/', function () {
     return view('auth.login');
@@ -37,12 +46,15 @@ Route::middleware([
     })->name('usuarios');
 });
 
-//****************   Servicios ********** */
+// ****************   Servicios ********** 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/Servicios', [App\Http\Controllers\ServiciosController::class, 'index'])->name('Servicios.index');
     Route::get('/Servicios/create', [App\Http\Controllers\ServiciosController::class, 'create'])->name('Servicios.create');
-   
+    Route::post('/Servicios/store', [App\Http\Controllers\ServiciosController::class, 'store'])->name('Servicios.store');
+    Route::get('/Servicios/edit/{id}', [App\Http\Controllers\ServiciosController::class, 'edit'])->name('Servicios.edit');
+    Route::put('/Servicios/update/{id}', [App\Http\Controllers\ServiciosController::class, 'update'])->name('Servicios.update');
 });
+
 
 //****************   Citas ********** */
 Route::group(['middleware' => ['auth']], function () {
