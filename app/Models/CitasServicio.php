@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class CitasServicio
+ * Class Citasservicio
  * 
  * @property int $id
  * @property int $cita_id
@@ -23,9 +23,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class CitasServicio extends Model
+class Citasservicio extends Model
 {
-	protected $table = 'citasServicios';
+	protected $table = 'citasservicios';
 
 	protected $casts = [
 		'cita_id' => 'int',
