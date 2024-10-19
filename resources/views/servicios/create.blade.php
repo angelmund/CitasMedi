@@ -4,6 +4,7 @@
 
 
 <form id="createServiceForm" method="POST" action="{{ route('Servicios.store') }}">
+  <input type="hidden" value="{{ url('/') }}" id="url">
   @csrf
   <div class="form-group">
       <label for="nombre">Nombre</label>

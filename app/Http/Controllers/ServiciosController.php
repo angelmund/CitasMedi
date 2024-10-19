@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ServiciosController extends Controller
 {
@@ -30,6 +31,7 @@ class ServiciosController extends Controller
     }
     public function store(Request $request){
         try {
+            // dd($request->all());
             // Validación
             $validator = Validator::make($request->all(), [
                 'nombre' => 'required|string|max:255|unique:servicios,nombre',
@@ -57,6 +59,7 @@ class ServiciosController extends Controller
             $servicio->descripcion = $request->input('descripcion');
             $servicio->precio = $request->input('precio');
             $servicio->color = $request->input('color');
+            // dd($servicio);
             $servicio->save();
 
             DB::commit();
@@ -68,7 +71,7 @@ class ServiciosController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
-                'mensaje' => 'Error al guardar el servicio: ' . $e->getMessage(),
+                'mensaje' => 'Error al guardar el servicio',
                 'idnotificacion' => 3,
             ]);
         }
@@ -120,10 +123,30 @@ class ServiciosController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
-                'mensaje' => 'Error al actualizar el servicio: ' . $e->getMessage(),
+                'mensaje' => 'Error al actualizar el servicio',
                 'idnotificacion' => 3,
             ]);
         }
     }
+
+    public function desactivarServicio($id){
+        try {
+            DB::beginTransaction();
+            $servicio = Servicio::findOrFail($id);
+            $servicio->activo = false;
+            $servicio->save();
+            DB::commit();
+            return response()->json([
+                'mensaje' => 'Servicio eliminado correctamente',
+                'idnotificacion' => 1,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'mensaje' => 'Error al eliminar el servicio',
+                'idnotificacion' => 3,
+            ]);
+        }
+    }   
     
 }

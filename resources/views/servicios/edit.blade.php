@@ -3,6 +3,8 @@
 </div>
 
 <form id="editServiceForm" method="POST" action="{{ route('Servicios.update', $servicio->id) }}">
+    <input type="hidden" value="{{ url('/') }}" id="url">
+    <input type="hidden" value="{{$servicio->id}}" id="id">
     @csrf
     @method('PUT')
     <div class="form-group">
