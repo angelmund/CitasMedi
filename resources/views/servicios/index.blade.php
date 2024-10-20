@@ -49,7 +49,7 @@
                     <td>{{ $servicio->nombre }}</td>
                     <td>{{ $servicio->descripcion }}</td>
                     <td>${{ $servicio->precio }}</td>
-                    <td style="width: 50px;">
+                    <td style="width: 50px;" class="text-center">
                         <span style="display: inline-block; width: 25px; height: 25px; border-radius: 50%; background-color: {{ $servicio->color }};"></span>
                     </td>
                     <td>
