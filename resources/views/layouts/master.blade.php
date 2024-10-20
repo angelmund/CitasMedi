@@ -190,6 +190,7 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/fullcalendar/fullcalendar.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
     <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
@@ -265,6 +266,8 @@
     <script src="../../assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
     <script src="../../assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
     <script src="../../assets/vendor/libs/select2/select2.js"></script>
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js')}}"></script>
     <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
     <script src="../../assets/vendor/libs/moment/moment.js"></script>
 
@@ -272,11 +275,36 @@
 
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script src="{{ asset('assets/JSgeneral/general.js') }}"></script>
+    <script src="{{asset('assets/JSgeneral/general.js')}}"></script>
 
     <!-- Page JS -->
     <script src="../../assets/js/app-calendar-events.js"></script>
     <script src="../../assets/js/app-calendar.js"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function aplicarSelect2(elementId) {
+                var element = $(elementId);
+                element.each(function () {
+                    var $this = $(this);
+                    $this.wrap('<div class="position-relative"></div>');
+                    $this.select2({
+                        dropdownAutoWidth: true,
+                        width: '100%',
+                        placeholder: 'Seleccione una opción',
+                        dropdownParent: $this.parent()
+                    });
+                });
+            }
+            aplicarSelect2('.select2');
+        });
+
+    </script>
+
+
+    @yield('js')
+
     <!-- Pickr JS -->
    <!-- Al final del archivo Blade, justo antes de cerrar el body -->
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.8.2/dist/pickr.min.js"></script>

@@ -15,13 +15,13 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property Carbon $fecha
- * @property time without time zone $hora
+ * @property Carbon $hora
  * @property int $users_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
  * @property User $user
- * @property Collection|CitasServicio[] $citas_servicios
+ * @property Collection|Servicio[] $servicios
  *
  * @package App\Models
  */
@@ -31,7 +31,7 @@ class Cita extends Model
 
 	protected $casts = [
 		'fecha' => 'datetime',
-		'hora' => 'time without time zone',
+		'hora' => 'datetime',
 		'users_id' => 'int'
 	];
 
@@ -46,8 +46,10 @@ class Cita extends Model
 		return $this->belongsTo(User::class, 'users_id');
 	}
 
-	public function citas_servicios()
+	public function servicios()
 	{
-		return $this->hasMany(CitasServicio::class);
+		return $this->belongsToMany(Servicio::class, 'citasservicios')
+					->withPivot('id')
+					->withTimestamps();
 	}
 }

@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/Servicios/store', [App\Http\Controllers\ServiciosController::class, 'store'])->name('Servicios.store');
     Route::get('/Servicios/edit/{id}', [App\Http\Controllers\ServiciosController::class, 'edit'])->name('Servicios.edit');
     Route::put('/Servicios/update/{id}', [App\Http\Controllers\ServiciosController::class, 'update'])->name('Servicios.update');
+    Route::post('/Servicios/eliminar/{id}', [App\Http\Controllers\ServiciosController::class, 'desactivarServicio'])->name('Servicios.desactivarServicio');
 });
 
 

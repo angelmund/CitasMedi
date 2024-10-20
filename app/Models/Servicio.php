@@ -15,11 +15,13 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property string $nombre
+ * @property string|null $descripcion
  * @property float $precio
+ * @property bool $activo
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property Collection|CitasServicio[] $citas_servicios
+ * @property Collection|Cita[] $citas
  *
  * @package App\Models
  */
@@ -29,8 +31,7 @@ class Servicio extends Model
 
 	protected $casts = [
 		'precio' => 'float',
-		'activo' => 'int'	
-		
+		'activo' => 'bool'
 	];
 
 	protected $fillable = [
@@ -40,8 +41,10 @@ class Servicio extends Model
 		'activo'
 	];
 
-	public function citas_servicios()
+	public function citas()
 	{
-		return $this->hasMany(CitasServicio::class);
+		return $this->belongsToMany(Cita::class, 'citasservicios')
+					->withPivot('id')
+					->withTimestamps();
 	}
 }
