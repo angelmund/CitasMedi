@@ -81,8 +81,16 @@
       <!-- Srvicios -->
       <li class="menu-item">
         <a href="{{route('Servicios.index')}}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-settings"></i>
+          <i class="menu-icon tf-icons ti ti-settings text-secondary"></i>
           <div data-i18n="Servicios">Servicios</div>
+        </a>
+      </li>
+
+      <!-- Especialidades -->
+      <li class="menu-item">
+        <a href="{{route('Especialidades.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-medical-cross text-danger"></i>
+          <div data-i18n="Especialidades">Especialidades</div>
         </a>
       </li>
     </ul>

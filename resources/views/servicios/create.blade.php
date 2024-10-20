@@ -3,7 +3,7 @@
 </div>
 
 
-<form id="createServiceForm" method="POST" action="{{ route('Servicios.store') }}">
+<form class="modal-form" id="createServiceForm" method="POST" action="{{ route('Servicios.store') }}">
   <input type="hidden" value="{{ url('/') }}" id="url">
   @csrf
   <div class="form-group">

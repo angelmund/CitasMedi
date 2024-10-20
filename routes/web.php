@@ -56,6 +56,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/Servicios/eliminar/{id}', [App\Http\Controllers\ServiciosController::class, 'desactivarServicio'])->name('Servicios.desactivarServicio');
 });
 
+// ****************   Especialidades ********** 
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/Especialidades', [App\Http\Controllers\EspecialidadesController::class, 'index'])->name('Especialidades.index');
+    Route::get('/Especialidades/create', [App\Http\Controllers\EspecialidadesController::class, 'create'])->name('Especialidades.create');
+    Route::post('/Especialidades/store', [App\Http\Controllers\EspecialidadesController::class, 'store'])->name('Especialidades.store');
+    Route::get('/Especialidades/edit/{id}', [App\Http\Controllers\EspecialidadesController::class, 'edit'])->name('Especialidades.edit');
+    Route::put('/Especialidades/update/{id}', [App\Http\Controllers\EspecialidadesController::class, 'update'])->name('Especialidades.update');
+    Route::post('/Especialidades/eliminar/{id}', [App\Http\Controllers\EspecialidadesController::class, 'desactivarServicio'])->name('Especialidades.desactivarServicio');
+});
+
+
 
 //****************   Citas ********** */
 Route::group(['middleware' => ['auth']], function () {
