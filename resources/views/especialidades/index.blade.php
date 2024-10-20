@@ -6,31 +6,35 @@
 
 <style>
     .pickr .pcr-button {
-  
-    height: 80%;
-    width: 80%;
+
+        height: 80%;
+        width: 80%;
     }
 </style>
 
 <div class="card">
+    <input type="hidden" value="{{ url('/') }}" id="url">
     <div class="card-header">
         <!-- Button trigger modal -->
-    <button type="button" class="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#createModal"
-    data-remote="{{route('Servicios.create')}}">
-      <i class="fas fa-plus"></i> Agregar Servicio
-    </button>
+        <button type="button" class="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal"
+            data-bs-target="#createModal" data-remote="{{route('Especialidades.create')}}">
+            <i class="fas fa-plus"></i> Agregar Servicio
+        </button>
 
-  
-        {{--  <div class="dropdown d-flex justify-content-end">
-            <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Exportar
+
+        {{-- <div class="dropdown d-flex justify-content-end">
+            <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Exportar
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="javascript:;" id="exportExcel"><i class="fas fa-file-excel me-50 font-small-4 text-success"></i> Excel</a></li>
-                <li><a class="dropdown-item" href="javascript:;" id="exportPdf"><i class="fas fa-file-pdf me-50 font-small-4 text-danger"></i> PDF</a></li>
+                <li><a class="dropdown-item" href="javascript:;" id="exportExcel"><i
+                            class="fas fa-file-excel me-50 font-small-4 text-success"></i> Excel</a></li>
+                <li><a class="dropdown-item" href="javascript:;" id="exportPdf"><i
+                            class="fas fa-file-pdf me-50 font-small-4 text-danger"></i> PDF</a></li>
             </ul>
-        </div>  --}}
-        
+        </div> --}}
+
     </div>
     <div class="card-body">
         <table class="table table-striped datables-servicios">
@@ -49,32 +53,43 @@
                     <td>{{ $especialidad->descripcion }}</td>
                     <td>
                         @if ($especialidad->activo == 1)
-                            <span class="badge bg-success">Activo</span>
-                            
+                        <span class="badge bg-success">Activo</span>
+
                         @else
-                            <span class="badge bg-danger">Inactivo</span>
+                        <span class="badge bg-danger">Inactivo</span>
                         @endif
                     </td>
-                       
+
                     <td>
                         <div class="dropdown">
-                            <button class="btn bg-gradient-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                              
+                            <button class="btn bg-gradient-primary dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <li>
-                                    <a class="dropdown-item" 
-                                       href="javascript:;" 
-                                       data-bs-toggle="modal" 
-                                       data-bs-target="#editModal" 
-                                       data-remote="{{ route('Especialidades.edit', $especialidad->id) }}">
+                                    <a class="dropdown-item" href="javascript:;" data-bs-toggle="modal"
+                                        data-bs-target="#editModal"
+                                        data-remote="{{ route('Especialidades.edit', $especialidad->id) }}">
                                         <i class="fas fa-edit me-50 font-small-4 text-warning"></i> Editar
                                     </a>
                                 </li>
-                                
-                                <li><a class="dropdown-item" href="javascript:;"><i class="fas fa-trash-alt me-50 font-small-4 text-danger"></i> Eliminar</a></li>
+
+                                <li>
+                                    @if ($especialidad->activo == 1)
+                                    <a class="dropdown-item desactivar" href="javascript:;" id="desactivar" data-id="{{$especialidad->id}}">
+                                        <i class="fas fa-trash-alt me-50 font-small-4 text-danger"></i> Desactivar
+                                    </a>
+                                        
+                                    @else
+                                    <a class="dropdown-item activar" href="javascript:;" id="activar" data-id="{{$especialidad->id}}">
+                                        <i class="fas fa-check me-50 font-small-4 text-success"></i> Activar
+                                    </a>
+                                    @endif
+                                    
+                                </li>
                             </ul>
-                          </div>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
@@ -164,4 +179,5 @@
         });
 
 </script>
+<script src="{{asset('assets/sistema/js/especialidades.js')}}"></script>
 @stop

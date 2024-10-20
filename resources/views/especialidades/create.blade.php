@@ -3,7 +3,7 @@
   </div>
   
   
-  <form class="modal-form" id="createServiceForm" method="POST" action="">
+  <form class="modal-form" id="createEspecialidadForm" method="POST" action="">
     <input type="hidden" value="{{ url('/') }}" id="url">
     @csrf
     <div class="form-group">
@@ -15,7 +15,7 @@
         <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
     </div>
   
-    <div class="row">
+    {{--  <div class="row">
       <div class="col">
         <div class="form-group">
           <label for="precio">Precio</label>
@@ -30,6 +30,6 @@
         </div>
       </div>
       
-    </div>
+    </div>  --}}
   </form>
   

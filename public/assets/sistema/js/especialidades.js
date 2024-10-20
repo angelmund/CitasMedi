@@ -1,22 +1,21 @@
-
+// Guardar un nuevo servicio
 $('#btnsave').click(function(event) {
     event.preventDefault();
     if (validaformulario()) { // Verifica si el formulario es válido
-        confirSave("¿Los datos capturados, son correctos?", function () {
-            saveSemestre();
+        confirSave("¿Los datos capturados son correctos?", function () {
+            saveEspecialidad();
         });
-    }else{
-        alertWarning('Faltan datos por capturar','Alerta');
+    } else {
+        alertWarning('Faltan datos por capturar', 'Alerta');
     }
 });
 
-async function saveSemestre() {
+
+async function saveEspecialidad() {
     const url = $('#url').val();
     try {
-        const formData = new FormData($('#form-createsemestre')[0]);
-        // console.log(formData);
-
-        const response = await fetch(url + '/Semestres/store', {
+        const formData = new FormData($('#createEspecialidadForm')[0]);
+        const response = await fetch(url + '/Especialidades/store', {
             method: 'POST',
             mode: 'cors',
             redirect: 'manual',
@@ -29,20 +28,17 @@ async function saveSemestre() {
         const data = await response.json();
         switch (data.idnotificacion) {
             case 1:
-                
                 Swal.fire({
                     title: data.mensaje,
                     icon: "success",
-                    showConfirmButton: false,  // No mostrar el botón "Ok"
-                    timer: 1000,  // Cerrar automáticamente después de 1500 milisegundos (1.5 segundos)
-                    timerProgressBar: true  // Mostrar una barra de progreso durante el temporizador
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true
                 });
-                // Esperar un breve período de tiempo antes de recargar la página
                 setTimeout(function () {
-                    document.getElementById('form-createsemestre').reset();
+                    document.getElementById('createEspecialidadForm').reset();
                     window.location.reload();
-                }, 1000); // Espera 1 segundo
-
+                }, 1000);
                 break;
 
             case 2:
@@ -52,10 +48,9 @@ async function saveSemestre() {
                     text: data.mensaje
                 });
                 break;
-
             case 3:
                 Swal.fire({
-                    icon: "error",
+                    icon: "info",
                     title: "Oops...",
                     text: data.mensaje
                 });
@@ -74,26 +69,25 @@ async function saveSemestre() {
     }
 }
 
-
+// Actualizar un servicio existente
 $('#btnupdate').click(function(event) {
     event.preventDefault();
 
     if (validaformulario()) { // Verifica si el formulario es válido
-        confirSave("¿Los datos capturados, son correctos?", function () {
-            semestreUpdate();
+        confirSave("¿Los datos capturados son correctos?", function () {
+            updateServicio();
         });
-    }else{
-        alertWarning('Faltan datos por capturar','Alerta');
+    } else {
+        alertWarning('Faltan datos por capturar', 'Alerta');
     }
 });
 
-async function semestreUpdate() {
+async function updateServicio() {
     const url = $('#url').val();
-    const idSemestre = $('#idSemestre').val();
+    const idEspecialidad = $('#id').val();
     try {
-        const formData = new FormData($('#form-editsemestre')[0]);
-
-        const response = await fetch(url + '/Semestres/update/' + idSemestre, {
+        const formData = new FormData($('#editEspecialidadForm')[0]);
+        const response = await fetch(url + '/Especialidades/update/' + idEspecialidad, {
             method: 'POST',
             mode: 'cors',
             redirect: 'manual',
@@ -106,20 +100,17 @@ async function semestreUpdate() {
         const data = await response.json();
         switch (data.idnotificacion) {
             case 1:
-                
                 Swal.fire({
                     title: data.mensaje,
                     icon: "success",
-                    showConfirmButton: false,  // No mostrar el botón "Ok"
-                    timer: 1000,  // Cerrar automáticamente después de 1500 milisegundos (1.5 segundos)
-                    timerProgressBar: true  // Mostrar una barra de progreso durante el temporizador
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true
                 });
-                // Esperar un breve período de tiempo antes de recargar la página
                 setTimeout(function () {
-                    document.getElementById('form-editsemestre').reset();
+                    document.getElementById('editEspecialidadForm').reset();
                     window.location.reload();
-                }, 1000); // Espera 1 segundo
-
+                }, 1000);
                 break;
 
             case 2:
@@ -129,10 +120,9 @@ async function semestreUpdate() {
                     text: data.mensaje
                 });
                 break;
-
             case 3:
                 Swal.fire({
-                    icon: "error",
+                    icon: "info",
                     title: "Oops...",
                     text: data.mensaje
                 });
@@ -151,21 +141,20 @@ async function semestreUpdate() {
     }
 }
 
-//
-
-$('.eliminarSemestre').click(function(event) {
+// Eliminar un servicio
+$('.desactivar').click(function(event) {
     event.preventDefault();
-    // Obtener el idSemestre del botón que ha sido clicado
-    var idSemestre = $(this).data('id');
-    confirSave("¿Está seguro de eliminar el semestre?", function () {
-        semestreDelete(idSemestre);
+    var idEspecialidad = $(this).data('id');
+    confirSave("¿Está seguro de desactiva la especialidad?", function () {
+        deleteEspecialidad(idEspecialidad);
     });
 });
 
-async function semestreDelete(idSemestre) {
+async function deleteEspecialidad(idEspecialidad) {
     const url = $('#url').val();
+    const ruta = window.location;
     try {
-        const response = await fetch(url + '/Semestres/destroy/' + idSemestre, {
+        const response = await fetch(ruta + '/Especialidades/eliminar/' + idEspecialidad, {
             method: 'POST',
             mode: 'cors',
             redirect: 'manual',
@@ -190,6 +179,12 @@ async function semestreDelete(idSemestre) {
                 break;
 
             case 2:
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: data.mensaje
+                });
+                break;
             case 3:
                 Swal.fire({
                     icon: "error",
@@ -211,21 +206,19 @@ async function semestreDelete(idSemestre) {
     }
 }
 
-
-$('.activarSemestre').click(function(event) {
+// Activar un servicio (si es necesario)
+$('.activarServicio').click(function(event) {
     event.preventDefault();
-    // Obtener el idSemestre del botón que ha sido clicado
-    var idSemestre = $(this).data('id');
-    // console.log(idSemestre);
-    confirSave("¿Está seguro que quiere activar el semestre?", function () {
-        semestreActivate(idSemestre);
+    var idEspecialidad = $(this).data('id');
+    confirSave("¿Está seguro que quiere activar el servicio?", function () {
+        activateServicio(idEspecialidad);
     });
 });
 
-async function semestreActivate(idSemestre) {
+async function activateServicio(idEspecialidad) {
     const url = $('#url').val();
     try {
-        const response = await fetch(url + '/Semestres/activar/' + idSemestre, {
+        const response = await fetch(url + '/Servicios/activar/' + idEspecialidad, {
             method: 'POST',
             mode: 'cors',
             redirect: 'manual',
@@ -250,6 +243,12 @@ async function semestreActivate(idSemestre) {
                 break;
 
             case 2:
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: data.mensaje
+                });
+                break;
             case 3:
                 Swal.fire({
                     icon: "error",
@@ -270,5 +269,3 @@ async function semestreActivate(idSemestre) {
         console.error("Error al procesar la solicitud:", error);
     }
 }
-
-

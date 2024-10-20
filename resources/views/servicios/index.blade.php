@@ -16,7 +16,7 @@
     <div class="card-header">
         <!-- Button trigger modal -->
     <button type="button" class="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#createModal"
-    data-remote="{{route('Especialidades.create')}}">
+    data-remote="{{route('Servicios.create')}}">
       <i class="fas fa-plus"></i> Agregar Especialidad
     </button>
 
