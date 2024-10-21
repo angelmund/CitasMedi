@@ -66,6 +66,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/Especialidades/eliminar/{id}', [App\Http\Controllers\EspecialidadesController::class, 'desactivarEspecialidad'])->name('Especialidades.desactivarEspecialidad');
 });
 
+// ****************   Pacientes ********** 
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/Pacientes', [App\Http\Controllers\PacientesController::class, 'index'])->name('Pacientes.index');
+    Route::get('/Pacientes/create', [App\Http\Controllers\PacientesController::class, 'create'])->name('Pacientes.create');
+    Route::post('/Pacientes/store', [App\Http\Controllers\PacientesController::class, 'store'])->name('Pacientes.store');
+    Route::get('/Pacientes/edit/{id}', [App\Http\Controllers\PacientesController::class, 'edit'])->name('Pacientes.edit');
+    Route::post('/Pacientes/update/{id}', [App\Http\Controllers\PacientesController::class, 'update'])->name('Pacientes.update');
+    Route::post('/Pacientes/eliminar/{id}', [App\Http\Controllers\PacientesController::class, 'desactivarPaciente'])->name('Pacientes.desactivarPaciente');
+});
 
 
 //****************   Citas ********** */

@@ -93,6 +93,14 @@
           <div data-i18n="Especialidades">Especialidades</div>
         </a>
       </li>
+      <!-- Pacientes -->
+      <li class="menu-item">
+        <a href="{{route('Pacientes.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-user text-primary"></i>
+          <div data-i18n="Pacientes">Pacientes</div>
+        </a>
+      </li>
+
     </ul>
   </div>
 </aside>
