@@ -25,7 +25,8 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Descripción</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
                     <th>Activo</th>
                     <th>Acciones</th>
                 </tr>
@@ -33,8 +34,9 @@
             <tbody>
                 @foreach ($pacientes as $paciente)
                 <tr>
-                    <td>{{ $paciente->nombre }}</td>
-                    <td>{{ $paciente->descripcion }}</td>
+                    <td>{{ $paciente->nombre }}   {{$paciente->apellido_paterno}} {{$paciente->apellido_materno}} </td>
+                    <td>{{ $paciente->telefono }}</td>
+                    <td>{{ $paciente->correo }}</td>
                     <td>
                         @if ($paciente->activo == 1)
                         <span class="badge bg-success">Activo</span>

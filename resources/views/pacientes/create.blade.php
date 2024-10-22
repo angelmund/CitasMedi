@@ -17,16 +17,16 @@
         <label for="apellido">Apellido Materno</label>
         <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" required placeholder="Apellido del Materno">
     </div>
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="direccion">Dirección</label>
         <textarea class="form-control" id="direccion" name="direccion" rows="3" required></textarea>
-    </div>
+    </div> --}}
     <div class="form-group">
         <label for="telefono">Teléfono</label>
         <input type="number" class="form-control" id="telefono" name="telefono" required placeholder="Teléfono del paciente">
     </div>
     <div class="form-group">
-        <label for="email">Correo Electrónico</label>
-        <input type="email" class="form-control" id="email" name="email" required placeholder="Correo electrónico del paciente">
+        <label for="correo">Correo Electrónico</label>
+        <input type="email" class="form-control" id="correo" name="correo" required placeholder="Correo electrónico del paciente">
     </div>
 </form>

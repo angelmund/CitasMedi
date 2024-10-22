@@ -34,12 +34,14 @@ class PacientesController extends Controller
                     'nombre' => 'required|max:150',
                     'apellido_paterno' => 'required|max:150',
                     'apellido_materno' => 'required|max:150',
-                    'direccion' => 'required'
+                    'telefono' => 'required',
+                    'correo' => 'required|email',
                 ], [
                     'nombre.required' => 'El nombre del paciente es obligatorio',
                     'apellido_paterno.required' => 'El apellido paterno del paciente es obligatorio',
                     'apellido_materno.required' => 'El apellido materno del paciente es obligatorio',
-                    'direccion.required' => 'La dirección es obligatoria',
+                    'telefono.required' => 'El teléfono del paciente es obligatorio',
+                    'correo.required' => 'El correo del paciente es obligatorio',
                 ]);
 
                 if ($validator->fails()) {
@@ -54,7 +56,8 @@ class PacientesController extends Controller
                 $paciente->nombre = Str::upper($request->input('nombre'));
                 $paciente->apellido_paterno = Str::upper($request->input('apellido_paterno'));
                 $paciente->apellido_materno = Str::upper($request->input('apellido_materno'));
-                $paciente->direccion = Str::upper($request->input('direccion'));
+                $paciente->telefono = $request->input('telefono');
+                $paciente->correo = $request->input('correo');
                 $paciente->save();
                 DB::commit();
 
@@ -88,12 +91,13 @@ class PacientesController extends Controller
                     'nombre' => 'required|max:150',
                     'apellido_paterno' => 'required|max:150',
                     'apellido_materno' => 'required|max:150',
-                    'direccion' => 'required'
+                    'correo' => 'required|email',
                 ], [
                     'nombre.required' => 'El nombre del paciente es obligatorio',
                     'apellido_paterno.required' => 'El apellido paterno del paciente es obligatorio',
                     'apellido_materno.required' => 'El apellido materno del paciente es obligatorio',
-                    'direccion.required' => 'La dirección es obligatoria',
+                    'telefono.required' => 'El teléfono del paciente es obligatorio',
+                    'correo.required' => 'El correo del paciente es obligatorio',
                 ]);
 
                 if ($validator->fails()) {
@@ -108,7 +112,8 @@ class PacientesController extends Controller
                 $paciente->nombre = Str::upper($request->input('nombre'));
                 $paciente->apellido_paterno = Str::upper($request->input('apellido_paterno'));
                 $paciente->apellido_materno = Str::upper($request->input('apellido_materno'));
-                $paciente->direccion = Str::upper($request->input('direccion'));
+                $paciente->telefono = $request->input('telefono');
+                $paciente->correo = $request->input('correo');
                 $paciente->save();
                 DB::commit();
 
@@ -150,3 +155,4 @@ class PacientesController extends Controller
         }
     }
 }
+

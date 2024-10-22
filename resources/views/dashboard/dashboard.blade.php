@@ -110,7 +110,7 @@
                     @foreach ($servicios as $servicio)
                     <div class="form-check form-check-{{ $servicio->color }} mb-2">
                         <input class="form-check-input input-filter" type="checkbox" id="select-{{ $servicio->id }}"
-                            data-value="{{ $servicio->id }}" checked />
+                            data-value="{{ $servicio->id }}" checked style="background-color: {{$servicio->color}}; color: {{$servicio->color}};" />
                         <label class="form-check-label" for="select-{{ $servicio->id }}">{{ $servicio->nombre }}</label>
                     </div>
                     @endforeach

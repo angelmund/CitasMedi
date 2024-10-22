@@ -33,4 +33,12 @@
         </div>
     </div>
 
+    {{-- Activo --}}
+    <div class="form-group">
+        <label for="activo">Activo</label>
+        <select class="form-select" id="activo" name="activo" required>
+            <option value="1" {{ $servicio->activo == 1 ? 'selected' : '' }}>Activo</option>
+            <option value="0" {{ $servicio->activo == 0 ? 'selected' : '' }}>Inactivo</option>
+        </select>
+
 </form>
