@@ -32,11 +32,13 @@ class PacientesController extends Controller
             try {
                 $validator = Validator::make($request->all(), [
                     'nombre' => 'required|max:150',
-                    'apellido' => 'required|max:150',
+                    'apellido_paterno' => 'required|max:150',
+                    'apellido_materno' => 'required|max:150',
                     'direccion' => 'required'
                 ], [
                     'nombre.required' => 'El nombre del paciente es obligatorio',
-                    'apellido.required' => 'El apellido del paciente es obligatorio',
+                    'apellido_paterno.required' => 'El apellido paterno del paciente es obligatorio',
+                    'apellido_materno.required' => 'El apellido materno del paciente es obligatorio',
                     'direccion.required' => 'La dirección es obligatoria',
                 ]);
 
@@ -50,7 +52,8 @@ class PacientesController extends Controller
                 DB::beginTransaction();
                 $paciente = new Paciente();
                 $paciente->nombre = Str::upper($request->input('nombre'));
-                $paciente->apellido = Str::upper($request->input('apellido'));
+                $paciente->apellido_paterno = Str::upper($request->input('apellido_paterno'));
+                $paciente->apellido_materno = Str::upper($request->input('apellido_materno'));
                 $paciente->direccion = Str::upper($request->input('direccion'));
                 $paciente->save();
                 DB::commit();
@@ -62,7 +65,7 @@ class PacientesController extends Controller
             } catch (\Exception $e) {
                 DB::rollBack();
                 return response()->json([
-                    'mensaje' => 'Error al guardar el paciente',
+                    'mensaje' => 'Error al guardar el paciente'. $e->getMessage(),
                     'idnotificacion' => 2,
                 ]);
             }
@@ -83,11 +86,13 @@ class PacientesController extends Controller
             try {
                 $validator = Validator::make($request->all(), [
                     'nombre' => 'required|max:150',
-                    'apellido' => 'required|max:150',
+                    'apellido_paterno' => 'required|max:150',
+                    'apellido_materno' => 'required|max:150',
                     'direccion' => 'required'
                 ], [
                     'nombre.required' => 'El nombre del paciente es obligatorio',
-                    'apellido.required' => 'El apellido del paciente es obligatorio',
+                    'apellido_paterno.required' => 'El apellido paterno del paciente es obligatorio',
+                    'apellido_materno.required' => 'El apellido materno del paciente es obligatorio',
                     'direccion.required' => 'La dirección es obligatoria',
                 ]);
 
@@ -101,7 +106,8 @@ class PacientesController extends Controller
                 DB::beginTransaction();
                 $paciente = Paciente::find($idPaciente);
                 $paciente->nombre = Str::upper($request->input('nombre'));
-                $paciente->apellido = Str::upper($request->input('apellido'));
+                $paciente->apellido_paterno = Str::upper($request->input('apellido_paterno'));
+                $paciente->apellido_materno = Str::upper($request->input('apellido_materno'));
                 $paciente->direccion = Str::upper($request->input('direccion'));
                 $paciente->save();
                 DB::commit();

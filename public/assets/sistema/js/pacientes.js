@@ -40,7 +40,7 @@ async function savePaciente() {
                 }, 1000);
                 break;
 
-            case 2:
+            case 3:
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -52,7 +52,7 @@ async function savePaciente() {
                 Swal.fire({
                     icon: "info",
                     title: "Info...",
-                    text: "Error desconocido"
+                    text: "Error desconocido" + " " + data.error   
                 });
         }
 

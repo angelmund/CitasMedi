@@ -11,11 +11,11 @@
     </div>
     <div class="form-group">
         <label for="apellido">Apellido Paterno</label>
-        <input type="text" class="form-control" id="apellido" name="apellido" required placeholder="Apellido del paciente">
+        <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" required placeholder="Apellido Paterno">
     </div>
     <div class="form-group">
         <label for="apellido">Apellido Materno</label>
-        <input type="text" class="form-control" id="apellido" name="apellido" required placeholder="Apellido del paciente">
+        <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" required placeholder="Apellido del Materno">
     </div>
     <div class="form-group">
         <label for="direccion">Dirección</label>
