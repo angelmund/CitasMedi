@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -26,10 +27,22 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return User::create([
+        // Crear el usuario
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        // Crear el paciente
+        $paciente = new Paciente();
+        $paciente->nombre = $input['name'];
+        $paciente->apellido_paterno = $input['apellido_paterno'];
+        $paciente->apellido_materno = $input['apellido_materno'];
+        $paciente->telefono = $input['telefono'];
+        $paciente->id_usuario = $user->id; // Asignar el ID del usuario creado
+        $paciente->save();
+
+        return $user;
     }
 }
