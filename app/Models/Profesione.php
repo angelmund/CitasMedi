@@ -48,7 +48,7 @@ class Profesione extends Model
 
 	public function especialidade()
 	{
-		return $this->belongsTo(Especialidad::class, 'especialidad_id');
+		return $this->belongsTo(Especialidade::class, 'especialidad_id');
 	}
 
 	public function user()

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $nombre
  * @property string|null $descripcion
  * @property float $precio
+ * @property string $color
  * @property bool $activo
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -38,6 +39,7 @@ class Servicio extends Model
 		'nombre',
 		'descripcion',
 		'precio',
+		'color',
 		'activo'
 	];
 
