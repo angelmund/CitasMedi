@@ -26,7 +26,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Teléfono</th>
-                    <th>Correo</th>
+                    {{--  <th>Expediente</th>  --}}
                     <th>Activo</th>
                     <th>Acciones</th>
                 </tr>
@@ -34,9 +34,8 @@
             <tbody>
                 @foreach ($pacientes as $paciente)
                 <tr>
-                    <td>{{ $paciente->nombre }}   {{$paciente->apellido_paterno}} {{$paciente->apellido_materno}} </td>
+                    <td>{{ $paciente->nombre }} {{$paciente->apellido_paterno}} {{$paciente->apellido_materno}} </td>
                     <td>{{ $paciente->telefono }}</td>
-                    <td>{{ $paciente->correo }}</td>
                     <td>
                         @if ($paciente->activo == 1)
                         <span class="badge bg-success">Activo</span>
@@ -59,12 +58,25 @@
                                 </li>
                                 <li>
                                     @if ($paciente->activo == 1)
-                                    <a class="dropdown-item desactivar" href="javascript:;" id="desactivar" data-id="{{$paciente->id}}">
+                                    <a class="dropdown-item desactivar" href="javascript:;" id="desactivar"
+                                        data-id="{{$paciente->id}}">
                                         <i class="fas fa-trash-alt me-50 font-small-4 text-danger"></i> Desactivar
                                     </a>
                                     @else
-                                    <a class="dropdown-item activar" href="javascript:;" id="activar" data-id="{{$paciente->id}}">
+                                    <a class="dropdown-item activar" href="javascript:;" id="activar"
+                                        data-id="{{$paciente->id}}">
                                         <i class="fas fa-check me-50 font-small-4 text-success"></i> Activar
+                                    </a>
+                                    @endif
+                                    @if ($paciente->expediente)
+                                    <a class="dropdown-item activar" href="javascript:;">
+                                        <i class="fas fa-eye me-50 font-small-4 text-danger"></i> Ver Expediente
+                                    </a>
+
+                                    @else
+                                    <a class="dropdown-item activar" href="javascript:;" data-bs-toggle="modal"
+                                        data-bs-target="#createExpedienteModal" data-remote="">
+                                        <i class="fas fa-plus me-50 font-small-4 text-success"></i> Agregar Expediente
                                     </a>
                                     @endif
                                 </li>

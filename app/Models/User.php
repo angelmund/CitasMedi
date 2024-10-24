@@ -7,11 +7,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class User
@@ -35,15 +35,15 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
  * @property Carbon|null $updated_at
  * 
  * @property Collection|Cita[] $citas
+ * @property Collection|Paciente[] $pacientes
  * @property Collection|Profesione[] $profesiones
  *
  * @package App\Models
  */
-
- class User extends Model implements AuthenticatableContract
+class User extends Model implements AuthenticatableContract
 {
-    use Authenticatable;
-
+    use Authenticatable, HasRoles;
+	
 	protected $table = 'users';
 
 	protected $casts = [
@@ -79,6 +79,11 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 	public function citas()
 	{
 		return $this->hasMany(Cita::class, 'users_id');
+	}
+
+	public function pacientes()
+	{
+		return $this->hasMany(Paciente::class, 'id_usuario');
 	}
 
 	public function profesiones()

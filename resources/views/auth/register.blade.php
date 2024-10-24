@@ -11,12 +11,31 @@
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <h2 class="text-center text-lg font-semibold mb-4">Datos de usuario</h2>
+                    <h2 class="text-center text-lg font-semibold mb-4">Tus Datos</h2>
                     <div class="mb-4">
                         <x-label for="name" value="{{ __('Name') }}" />
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                     </div>
 
+                    <div class="mb-4">
+                        <x-label for="apellido_paterno" value="{{ __('Apellido Paterno') }}" />
+                        <x-input id="apellido_paterno" class="block mt-1 w-full" type="text" name="apellido_paterno" :value="old('apellido_paterno')" required autofocus autocomplete="apellido_paterno" />
+                    </div>
+
+                    <div class="mb-4">
+                        <x-label for="apellido_materno" value="{{ __('Apellido Materno') }}" />
+                        <x-input id="apellido_materno" class="block mt-1 w-full" type="text" name="apellido_materno" :value="old('apellido_materno')" required autofocus autocomplete="apellido_materno" />
+                    </div>
+                    <div class="mb-4">
+                        <x-label for="telefono" value="{{ __('Teléfono') }}" />
+                        <x-input id="telefono" class="block mt-1 w-full" type="text" name="telefono" :value="old('telefono')" required autofocus autocomplete="telefono" />
+                    </div>
+
+                   
+                </div>
+
+                <div>
+                    <h2 class="text-center text-lg font-semibold mb-4">Datos para inicio de sesi&oacute;n</h2>
                     <div class="mb-4">
                         <x-label for="email" value="{{ __('Email') }}" />
                         <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
@@ -31,44 +50,8 @@
                         <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                         <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
                     </div>
-                </div>
 
-                <div>
-                    <h2 class="text-center text-lg font-semibold mb-4">Datos de Alumno</h2>
-                    <div class="mb-4">
-                        <x-label for="clave" value="{{ __('Clave') }}" />
-                        <x-input id="clave" class="block mt-1 w-full" type="text" name="clave" :value="old('clave')" required autofocus autocomplete="clave" />
-                    </div>
-
-                    <div class="mb-4">
-                        <x-label for="primer_apellido" value="{{ __('Apellido Paterno') }}" />
-                        <x-input id="primer_apellido" class="block mt-1 w-full" type="text" name="primer_apellido" :value="old('primer_apellido')" required autofocus autocomplete="primer_apellido" />
-                    </div>
-
-                    <div class="mb-4">
-                        <x-label for="segundo_apellido" value="{{ __('Apellido Materno') }}" />
-                        <x-input id="segundo_apellido" class="block mt-1 w-full" type="text" name="segundo_apellido" :value="old('segundo_apellido')" required autofocus autocomplete="segundo_apellido" />
-                    </div>
-
-                    <div class="mb-4">
-                        <x-label for="carreramodalidad_id" value="{{ __('Modalidad - Carrera') }}" />
-                        <select id="carreramodalidad_id" name="carreramodalidad_id" class="select2 py-2 px-3 w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required>
-                            <option value="">{{ __('selecciona tu Carrera') }}</option>
-                            @foreach ($carrearModalidad as $modalidad)
-                                <option value="{{ $modalidad->id }}">{{ $modalidad->modalidade->nombre_modalidad }} {{$modalidad->nombre_carrera}} - {{ $modalidad->niveles_academico->nombre_nivel }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-4">
-                        <x-label for="semestre_id" value="{{ __('Semestre') }}" />
-                        <select id="semestre_id" name="semestre_id" class="select2 py-2 px-3 w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required>
-                            <option value="">{{ __('selecciona tu semestre') }}</option>
-                            @foreach ($semestres as $semestre)
-                                <option value="{{ $semestre->id }}">{{ $semestre->nombre_semestre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -101,24 +84,3 @@
     </x-register-card>
 </x-guest-layout>
 
-<script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
-<script src="{{ asset('assets/vendor/libs/select2/select2.js')}}"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        function aplicarSelect2(elementId) {
-            var element = $(elementId);
-            element.each(function () {
-                var $this = $(this);
-                $this.wrap('<div class="relative"></div>');
-                $this.select2({
-                    dropdownAutoWidth: true,
-                    width: '100%',
-                    placeholder: 'Seleccione una opción',
-                    dropdownParent: $this.parent()
-                });
-            });
-        }
-        aplicarSelect2('.select2');
-    });
-</script>

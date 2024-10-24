@@ -16,39 +16,45 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $nombre
  * @property string $apellido_paterno
  * @property string $apellido_materno
- * @property int $telefono
- * @property string $correo
+ * @property string|null $telefono
+ * @property int $id_usuario
+ * @property bool $activo
  * @property int|null $expediente_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * 
  * @property ExpedientesMedico|null $expedientes_medico
+ * @property User $user
  *
  * @package App\Models
  */
 class Paciente extends Model
 {
 	protected $table = 'pacientes';
-	public $incrementing = false;
 
 	protected $casts = [
-		'id' => 'int',
-		'telefono' => 'int',
+		'id_usuario' => 'int',
+		'activo' => 'bool',
 		'expediente_id' => 'int'
 	];
 
 	protected $fillable = [
-		'id',
 		'nombre',
 		'apellido_paterno',
 		'apellido_materno',
 		'telefono',
-		'correo',
+		'id_usuario',
+		'activo',
 		'expediente_id'
 	];
 
 	public function expedientes_medico()
 	{
 		return $this->belongsTo(ExpedientesMedico::class, 'expediente_id');
+	}
+
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'id_usuario');
 	}
 }

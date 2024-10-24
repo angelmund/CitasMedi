@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * 
- * @property Paciente $paciente
+ * @property Collection|Paciente[] $pacientes
  *
  * @package App\Models
  */
@@ -39,8 +40,8 @@ class ExpedientesMedico extends Model
 		'gabinete'
 	];
 
-	public function paciente()
+	public function pacientes()
 	{
-		return $this->hasOne(Paciente::class, 'expediente_id');
+		return $this->hasMany(Paciente::class, 'expediente_id');
 	}
 }

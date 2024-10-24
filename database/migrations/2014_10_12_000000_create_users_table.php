@@ -17,7 +17,7 @@ return new class extends Migration
             // $table->string('apPaterno',60);
             // $table->string('apMaterno',60);
             $table->string('email')->unique();
-            $table->string('telefono')->unique();
+            // $table->string('telefono')->unique();
             $table->boolean('activo')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
