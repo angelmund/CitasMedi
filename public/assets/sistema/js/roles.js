@@ -3,20 +3,21 @@ $('#btnsave').click(function(event) {
     event.preventDefault();
     if (validaformulario()) { // Verifica si el formulario es válido
         confirSave("¿Los datos capturados, son correctos?", function () {
-            saveTurno();
+            saveRol();
         });
     }else{
         alertWarning('Faltan datos por capturar','Alerta');
     }
 });
 
-async function saveTurno() {
+async function saveRol() {
     const url = $('#url').val();
+    // const ruta = window.location;
     try {
-        const formData = new FormData($('#form-create')[0]);
+        const formData = new FormData($('#createrol')[0]);
         // console.log(formData);
 
-        const response = await fetch(url + '/Modalidades/store', {
+        const response = await fetch(url + '/Roles/store', {
             method: 'POST',
             mode: 'cors',
             redirect: 'manual',
@@ -39,7 +40,7 @@ async function saveTurno() {
                 });
                 // Esperar un breve período de tiempo antes de recargar la página
                 setTimeout(function () {
-                    document.getElementById('form-create').reset();
+                    document.getElementById('createrol').reset();
                     window.location.reload();
                 }, 1000); // Espera 1 segundo
 
@@ -80,20 +81,20 @@ $('#btnupdate').click(function(event) {
 
     if (validaformulario()) { // Verifica si el formulario es válido
         confirSave("¿Los datos capturados, son correctos?", function () {
-            TurnoUpdate();
+            rolUpdate();
         });
     }else{
         alertWarning('Faltan datos por capturar','Alerta');
     }
 });
 
-async function TurnoUpdate() {
+async function rolUpdate() {
     const url = $('#url').val();
-    const idModalidad = $('#idModalidad').val();
+    const id = $('#rol').val();
     try {
-        const formData = new FormData($('#form-edit')[0]);
+        const formData = new FormData($('#editrol')[0]);
 
-        const response = await fetch(url + '/Modalidades/update/' + idModalidad, {
+        const response = await fetch(url + '/Roles/update/' + id, {
             method: 'POST',
             mode: 'cors',
             redirect: 'manual',
@@ -116,7 +117,7 @@ async function TurnoUpdate() {
                 });
                 // Esperar un breve período de tiempo antes de recargar la página
                 setTimeout(function () {
-                    document.getElementById('form-edit').reset();
+                    document.getElementById('editrol').reset();
                     window.location.reload();
                 }, 1000); // Espera 1 segundo
 

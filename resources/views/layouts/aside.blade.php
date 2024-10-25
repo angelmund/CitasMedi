@@ -65,6 +65,20 @@
               <div data-i18n="Pacientes">Pacientes</div>
             </a>
           </li>
+          <!-- Usuarios -->
+          <li class="menu-item">
+            <a href="{{route('Usuarios.index')}}" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-users text-primary"></i>
+              <div data-i18n="Usuarios">Usuarios</div>
+            </a>
+          </li>
+          <!-- Roles -->
+          <li class="menu-item">
+            <a href="{{route('Roles.index')}}" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-lock text-primary"></i>
+              <div data-i18n="Roles">Roles</div>
+            </a>
+          </li>
           {{--  <li class="menu-item">
             <a href="layouts-container.html" class="menu-link">
               <i class="menu-icon tf-icons ti ti-arrows-maximize"></i>

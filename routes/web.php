@@ -46,6 +46,27 @@ Route::middleware([
     })->name('usuarios');
 });
 
+// ****************   Usuarios **********
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/Usuarios', [App\Http\Controllers\UsuariosController::class, 'index'])->name('Usuarios.index');
+    Route::get('/Usuarios/create', [App\Http\Controllers\UsuariosController::class, 'create'])->name('Usuarios.create');
+    Route::post('/Usuarios/store', [App\Http\Controllers\UsuariosController::class, 'store'])->name('Usuarios.store');
+    Route::get('/Usuarios/edit/{id}', [App\Http\Controllers\UsuariosController::class, 'edit'])->name('Usuarios.edit');
+    Route::post('/Usuarios/update/{id}', [App\Http\Controllers\UsuariosController::class, 'update'])->name('Usuarios.update');
+    Route::post('/Usuarios/eliminar/{id}', [App\Http\Controllers\UsuariosController::class, 'desactivarUsuario'])->name('Usuarios.desactivarUsuario');
+});
+
+// ****************   Roles **********
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/Roles', [App\Http\Controllers\RolesController::class, 'index'])->name('Roles.index');
+    Route::get('/Roles/create', [App\Http\Controllers\RolesController::class, 'create'])->name('Roles.create');
+    Route::post('/Roles/store', [App\Http\Controllers\RolesController::class, 'store'])->name('Roles.store');
+    Route::get('/Roles/edit/{id}', [App\Http\Controllers\RolesController::class, 'edit'])->name('Roles.edit');
+    Route::post('/Roles/update/{id}', [App\Http\Controllers\RolesController::class, 'update'])->name('Roles.update');
+    Route::post('/Roles/eliminar/{id}', [App\Http\Controllers\RolesController::class, 'desactivarRol'])->name('Roles.desactivarRol');
+});
+
+
 // ****************   Servicios ********** 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/Servicios', [App\Http\Controllers\ServiciosController::class, 'index'])->name('Servicios.index');

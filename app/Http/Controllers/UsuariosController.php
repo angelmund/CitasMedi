@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UsuarioController extends Controller
+class UsuariosController extends Controller
 {
     public function index()
     {
         if(Auth::check()){
-            return view('usuarios.index');
+            $usuarios = User::all();
+            return view('admin.usuarios.index', compact('usuarios'));
         }else{
             return redirect()->route('/');
         }
